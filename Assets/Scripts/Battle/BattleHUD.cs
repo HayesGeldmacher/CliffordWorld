@@ -1,19 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
-public class BattleUnit : MonoBehaviour
+using TMPro;
+public class BattleHUD : MonoBehaviour
 {
-
-    public string _unitName;
-    public int _unitLevel;
-    public int _damage;
-    public int _maxHP;
-    public int _currentHP;
-    public int _currentAP;
-    public int _maxAP;
-    
-    
     // Start is called before the first frame update
     void Start()
     {

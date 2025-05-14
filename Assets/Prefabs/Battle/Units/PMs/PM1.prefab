@@ -28,7 +28,7 @@ Transform:
   m_GameObject: {fileID: 1013555809669479381}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: 0.66452664, z: -0.7472646, w: 0}
-  m_LocalPosition: {x: -0.58, y: -1.84, z: 1.44}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.099547364, y: 0.099547364, z: 0.099547364}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -132,7 +132,7 @@ Transform:
   m_GameObject: {fileID: 3054834621202477118}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -9.83}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children:
@@ -151,7 +151,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c4dc723fc65b2384086a0f6adb201eb1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _unitName: Clififord
+  _unitName: Clifford
   _unitLevel: 4
   _damage: 10
   _maxHP: 30
