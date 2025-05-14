@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Unity : MonoBehaviour
+public class BattleUnit : MonoBehaviour
 {
 
     public string _unitName;

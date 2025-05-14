@@ -14,6 +14,9 @@ public class BattleManager : MonoBehaviour
     public Transform _playerSpawnPoint;
     public Transform _enemySpawnPoint;
 
+    private BattleUnit _playerUnit;
+    private BattleUnit _enemyUnit;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -23,6 +26,7 @@ public class BattleManager : MonoBehaviour
     private void InitializeBattle()
     {
         GameObject newPlayer = Instantiate(_playerPref, _playerSpawnPoint);
+        _playerUnit = newPlayer.GetComponent<BattleUnit>();
         GameObject newnEnemy = Instantiate(_enemyPref, _enemySpawnPoint);
     }
 }
