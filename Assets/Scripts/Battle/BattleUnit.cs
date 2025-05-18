@@ -14,7 +14,7 @@ public class BattleUnit : MonoBehaviour
     public int _maxAP;
     
     
-    // Start is called before the first frame update
+    // Start is called beforde the first frame update
     void Start()
     {
         
