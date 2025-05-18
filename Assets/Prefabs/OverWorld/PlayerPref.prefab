@@ -25,7 +25,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1343844160900275731}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.24676035, y: 0.000000008337151, z: -0.0000000021229267, w: 0.9690766}
+  m_LocalRotation: {x: 0.20605013, y: -0.000000016837156, z: 0.0000000035453773, w: 0.97854143}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -238,7 +238,7 @@ MonoBehaviour:
   _groundMask:
     serializedVersion: 2
     m_Bits: 129
-  _fallSpeed: 8
+  _fallSpeed: -8
   _grounded: 1
   _turnSmoothTime: 0.1
 --- !u!1 &3322398691788669553
@@ -266,7 +266,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3322398691788669553}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.26430023, y: 0.00000001659453, z: -0.0000000045476503, w: 0.96444046}
+  m_LocalRotation: {x: 0.22376838, y: 0.000000018749505, z: -0.000000004304704, w: 0.97464234}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -346,7 +346,7 @@ Transform:
   m_GameObject: {fileID: 3579100778074513837}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 4.5, z: -6.9999995}
+  m_LocalPosition: {x: 0, y: 2.61, z: -4.9199996}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -402,7 +402,7 @@ MonoBehaviour:
     m_DecelTime: 0.1
     m_InputAxisName: Mouse Y
     m_InputAxisValue: 0
-    m_InvertInput: 0
+    m_InvertInput: 1
     m_MinValue: 0
     m_MaxValue: 1
     m_Wrap: 0
@@ -449,12 +449,12 @@ MonoBehaviour:
   m_BindingMode: 4
   m_SplineCurvature: 0.2
   m_Orbits:
-  - m_Height: 4.5
-    m_Radius: 7
-  - m_Height: 4.5
-    m_Radius: 7
-  - m_Height: 4.5
-    m_Radius: 7
+  - m_Height: 9.5
+    m_Radius: 9
+  - m_Height: 2.61
+    m_Radius: 4.92
+  - m_Height: 1
+    m_Radius: 3
   m_LegacyHeadingBias: 3.4028235e+38
   m_Rigs:
   - {fileID: 972726860126722566}
@@ -473,7 +473,7 @@ GameObject:
   - component: {fileID: 5528729496860600057}
   - component: {fileID: 1576049466706273302}
   m_Layer: 6
-  m_Name: Cube
+  m_Name: FrontFaceCube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -621,7 +621,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4836175166628447305}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.28179917, y: -0.000000016509066, z: 0.000000004848745, w: 0.95947343}
+  m_LocalRotation: {x: 0.2414596, y: -0.00000001669726, z: 0.0000000041546455, w: 0.9704109}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -734,7 +734,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_BindingMode: 4
-  m_FollowOffset: {x: 0, y: 4.5, z: -7}
+  m_FollowOffset: {x: 0, y: 2.61, z: -4.92}
   m_XDamping: 1
   m_YDamping: 1
   m_ZDamping: 1
@@ -895,7 +895,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_BindingMode: 4
-  m_FollowOffset: {x: 0, y: 4.5, z: -7}
+  m_FollowOffset: {x: 0, y: 2.61, z: -4.92}
   m_XDamping: 1
   m_YDamping: 1
   m_ZDamping: 1
@@ -1022,7 +1022,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_BindingMode: 4
-  m_FollowOffset: {x: 0, y: 4.5, z: -7}
+  m_FollowOffset: {x: 0, y: 2.61, z: -4.92}
   m_XDamping: 1
   m_YDamping: 1
   m_ZDamping: 1
@@ -1118,8 +1118,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8274044020676373739}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.26430023, y: 0.00000001659453, z: -0.0000000045476503, w: 0.96444046}
-  m_LocalPosition: {x: 0, y: 4.5, z: -6.9999995}
+  m_LocalRotation: {x: 0.22376838, y: 0.00000003749901, z: -0.000000008609407, w: 0.97464234}
+  m_LocalPosition: {x: 0, y: 2.61, z: -4.9199996}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1164,7 +1164,7 @@ Camera:
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 247
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
