@@ -9,12 +9,14 @@ public class Interactable : MonoBehaviour
     public bool _talking = false;
     [SerializeField] protected bool _canWalkAway;
     [SerializeField] protected bool _timed = false;
+    [SerializeField] protected float _dialogueTimer;
+    [SerializeField] protected float _currentDialogueTime = 0;
     [SerializeField] protected float _dialogueDistance;
+    private float _currentDistance;
     public DialogueManager _manager;
     public Dialogue _dialogue;
     public Transform _player;
 
-    [SerializeField] private Animator _dialogueBoxAnim;
     public bool _startedTalking = false;
 
     [Header("Appear Variablels")]
@@ -26,11 +28,10 @@ public class Interactable : MonoBehaviour
     [Header("Sound Variables")]
     [SerializeField] protected bool _playSound = false;
     [SerializeField] protected AudioClip _soundList;
+    [SerializeField] protected AudioSource _soundSource;
+    [SerializeField] protected int _currentSound = 0;
 
-
-
-    // Start is called before the first frame update
-    void Start()
+    public virtual void Start()
     {
         
     }
@@ -38,11 +39,90 @@ public class Interactable : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if (_startedTalking)
+        {
+
+            if (_canWalkAway)
+            {
+                _currentDistance = Vector3.Distance(_player.position, transform.position);
+                if (_currentDistance >= _dialogueDistance)
+                {
+                    EndDialogue();
+                }
+
+            }
+
+            if (_timed)
+            {
+                _currentDialogueTime -= Time.deltaTime;
+                if(_currentDialogueTime <= 0)
+                {
+                    EndDialogue();
+                }
+            }
+        }
     }
 
     public void Interact()
     {
-        Debug.Log("Interacted!");
+       //set variables here to save assigned variables to stuff player doesnt touch
+        
+        if(_player == null && _canWalkAway)
+        {
+            _player = GameObject.Find("Player").transform;
+        }
+
+       if(_manager == null)
+        {
+            _manager = GameManager.instance.GetComponent<DialogueManager>();
+        }
+
+
+        if (_talk)
+        {
+            if (_timed)
+            {
+                _currentDialogueTime = _dialogueTimer;
+            }
+            TriggerDialogue();
+
+        }
+    }
+
+    public virtual void TriggerDialogue()
+    {
+
+        Debug.Log("interacteed!");
+        
+        if (!_startedTalking)
+        {
+            Debug.Log("Started new dialogue interaction");
+            _manager.StartDialogue(_dialogue, this);
+            _startedTalking = true;
+        }
+        else
+        {
+            _manager.DisplayNextSentence();
+        }
+    }
+
+    public virtual void EndDialogue()
+    {
+        _startedTalking = false;
+        _manager.EndDialogue();
+    }
+
+    public virtual void CallEndDialogue()
+    {
+        _manager.CallTimerEnd(_dialogueTimer);
+    }
+
+    public virtual void PickupItem()
+    {
+        if (_talk)
+        {
+            _manager.CallTimerEnd(_dialogueTimer);
+        }
+        Destroy(gameObject);
     }
 }

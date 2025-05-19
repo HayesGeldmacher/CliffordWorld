@@ -20,7 +20,7 @@ public class DialogueManager : MonoBehaviour
 
     public void StartDialogue(Dialogue dialogue, Interactable trigger)
     {
-        if(_currentTrigger != null)
+        if (_currentTrigger != null)
         {
             _currentTrigger._startedTalking = false;
         }
@@ -31,7 +31,7 @@ public class DialogueManager : MonoBehaviour
         _sentences.Clear();
 
         //uses FIFO to queue up each sentence in our public dialogue box
-        foreach(string sentence in dialogue.sentences)
+        foreach (string sentence in dialogue._sentences)
         {
             _sentences.Enqueue(sentence);
         }
@@ -39,11 +39,11 @@ public class DialogueManager : MonoBehaviour
         DisplayNextSentence();
     }
 
-    private void DisplayNextSentence()
+    public void DisplayNextSentence()
     {
         Debug.Log("Continued Dialogue!");
 
-        if(_sentences.Count == 0)
+        if (_sentences.Count == 0)
         {
             EndDialogue();
             return;
@@ -55,10 +55,10 @@ public class DialogueManager : MonoBehaviour
         Debug.Log(loadedText);
     }
 
-    private void EndDialogue()
+    public void EndDialogue()
     {
         Debug.Log("End of dialogue");
-        _dialogueBoxAnim.SetBool("active", true);
+        _dialogueBoxAnim.SetBool("active", false);
         _dialogueText.text = "";
 
         if (_currentTrigger)
@@ -70,5 +70,14 @@ public class DialogueManager : MonoBehaviour
         _talking = false;
     }
 
-    
+    public void CallTimerEnd(float textTime)
+    {
+        StartCoroutine(TimerEnd(textTime));
+    }
+
+    private IEnumerator TimerEnd(float textTime)
+    {
+        yield return new WaitForSeconds(textTime);
+        EndDialogue();
+    }
 }
