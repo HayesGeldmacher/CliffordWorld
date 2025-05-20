@@ -16,7 +16,12 @@ public class ItemPickup : Interactable
     {
 
         Debug.Log("picking up " + _item.name);
-        //add item to inventory
-        Destroy(gameObject);
+        bool wasPickedUp = Inventory.instance.Add(_item);
+
+        if (wasPickedUp)
+        {
+            Destroy(gameObject);
+            
+        }
     }
 }
