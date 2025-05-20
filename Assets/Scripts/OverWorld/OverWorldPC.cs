@@ -54,8 +54,8 @@ public class OverWorldPC : MonoBehaviour
         _controller = GetComponent<CharacterController>();
 
         //lock and hide that damn mouse cursor!
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
+        //Cursor.lockState = CursorLockMode.Locked;
+       // Cursor.visible = false;
     }
 
     // Update is called once per frame
@@ -112,9 +112,6 @@ public class OverWorldPC : MonoBehaviour
             speed = _walkSpeed;
         }
 
-
-
-
          //Check if input is detected before moving player
          float moveMag = direction.magnitude;
         if(moveMag > 0.1f)
@@ -130,9 +127,5 @@ public class OverWorldPC : MonoBehaviour
             Vector3 moveDir = Quaternion.Euler(0f, targetAngle, 0f) * Vector3.forward;
             _controller.Move(moveDir * speed * Time.deltaTime);
         }
-
-
-
-
     }
 }
