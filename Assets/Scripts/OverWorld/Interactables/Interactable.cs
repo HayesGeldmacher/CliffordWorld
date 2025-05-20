@@ -37,7 +37,7 @@ public class Interactable : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    public virtual void Update()
     {
         if (_startedTalking)
         {
@@ -63,7 +63,7 @@ public class Interactable : MonoBehaviour
         }
     }
 
-    public void Interact()
+    public virtual void Interact()
     {
        //set variables here to save assigned variables to stuff player doesnt touch
         
