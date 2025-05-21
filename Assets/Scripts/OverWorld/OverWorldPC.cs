@@ -54,8 +54,8 @@ public class OverWorldPC : MonoBehaviour
         _controller = GetComponent<CharacterController>();
 
         //lock and hide that damn mouse cursor!
-        //Cursor.lockState = CursorLockMode.Locked;
-       // Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
     }
 
     // Update is called once per frame
