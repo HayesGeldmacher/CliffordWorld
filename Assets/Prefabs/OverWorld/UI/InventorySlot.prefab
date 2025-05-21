@@ -326,6 +326,7 @@ GameObject:
   m_Component:
   - component: {fileID: 622526855229995066}
   - component: {fileID: 8590374967192781845}
+  - component: {fileID: 4071637986023444570}
   m_Layer: 5
   m_Name: InventorySlot
   m_TagString: Untagged
@@ -362,3 +363,16 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6641070534140643248}
   m_CullTransparentMesh: 1
+--- !u!114 &4071637986023444570
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6641070534140643248}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 00f07b54d77d00e44a1487ea0b7be295, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _icon: {fileID: 4713049590141502242}
