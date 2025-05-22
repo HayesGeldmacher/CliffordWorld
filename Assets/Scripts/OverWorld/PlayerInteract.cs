@@ -10,6 +10,7 @@ public class PlayerInteract : MonoBehaviour
     [SerializeField] private LayerMask _interactMask;
     public bool _canInteract = true;
 
+    [SerializeField] private Transform _interactPoint;
     [SerializeField] private Animator _interactCursorAnim;
     
     
@@ -26,7 +27,7 @@ public class PlayerInteract : MonoBehaviour
         if (_canInteract)
         {
             RaycastHit hit;
-            if(Physics.Raycast(transform.position, transform.forward, out hit, _interactRange, _interactMask))
+            if(Physics.Raycast(_interactPoint.position, transform.forward, out hit, _interactRange, _interactMask))
             {
                 if(hit.transform.GetComponent<Interactable>() != null)
                 {
