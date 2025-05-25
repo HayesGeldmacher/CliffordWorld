@@ -4,9 +4,11 @@ using UnityEngine;
 public class KeyItem : Item
 {
 
+    public string _keyValue;
 
     public override void Use()
     {
+        base.Use();
         Debug.Log("using " + name);
     }
 }

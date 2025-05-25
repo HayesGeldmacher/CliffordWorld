@@ -80,4 +80,21 @@ public class Inventory : MonoBehaviour
             onItemChangedCallback.Invoke();
         }
     }
+
+    public KeyItem CheckForKeys(string lockValue)
+    {
+        foreach(Item item in _items)
+        {
+            if(item is KeyItem keyItem)
+            {
+               if(keyItem._keyValue == lockValue)
+                {
+                    Debug.Log("Unlocked door with " + keyItem.name);
+                    return(keyItem);
+                }
+            }
+        }
+
+        return null;
+    }
 }
