@@ -25,4 +25,17 @@ public class BattleUnit : MonoBehaviour
     {
         
     }
+    
+    public bool TakeDamage(float damage)
+    {
+        _currentHP -= _damage;
+        if(_currentHP <= 0)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
 }
