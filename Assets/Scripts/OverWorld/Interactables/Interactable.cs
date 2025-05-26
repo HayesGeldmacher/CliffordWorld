@@ -5,34 +5,39 @@ using UnityEngine;
 
 public class Interactable : MonoBehaviour
 {
-    public InteractableAppear _appearFields;
-
-
     [Header("Dialogue Variables")]
-    [HideInInspector] public bool _talk = true;
-    [HideInInspector] public bool _talking = false;
-    [HideInInspector] public bool _canWalkAway;
-    [HideInInspector] public bool _timed = false;
-    [HideInInspector] public float _dialogueTimer;
-    [HideInInspector] public float _currentDialogueTime = 0;
-    [HideInInspector] public float _dialogueDistance;
-    [HideInInspector] public float _currentDistance;
-    [HideInInspector] public DialogueManager _manager;
-    [HideInInspector] public Dialogue _dialogue;
-    [HideInInspector] public Transform _player;
-    [HideInInspector] public bool _startedTalking = false;
-
-    
+    [SerializeField] public bool _talk = true;
+    [SerializeField] public bool _talking = false;
+    [SerializeField] public bool _canWalkAway;
+    [SerializeField] public bool _timed = false;
+    [SerializeField] public float _dialogueTimer;
+    [SerializeField] public float _currentDialogueTime = 0;
+    [SerializeField] public float _dialogueDistance;
+    [SerializeField] public float _currentDistance;
+    [SerializeField] public DialogueManager _manager;
+    [SerializeField] public Dialogue _dialogue;
+    [SerializeField] public Transform _player;
+    [SerializeField] public bool _startedTalking = false;
 
     [Header("Sound Variables")]
-    [HideInInspector] protected bool _playSound = false;
-    [HideInInspector] protected AudioClip _soundList;
-    [HideInInspector] protected AudioSource _soundSource;
-    [HideInInspector] protected int _currentSound = 0;
+    [SerializeField] public bool _playSound = false;
+    [SerializeField] public AudioClip _soundClipDefault;
+    [SerializeField] public AudioSource _soundSource;
 
     public virtual void Start()
     {
-        
+        if (_playSound)
+        {
+            if(TryGetComponent<AudioSource>(out AudioSource source))
+            {
+                _soundSource = source;
+            }
+            else
+            {
+                _playSound = false;
+            }
+        }
+
     }
 
     // Update is called once per frame
@@ -86,6 +91,18 @@ public class Interactable : MonoBehaviour
             TriggerDialogue();
 
         }
+
+        if (_playSound)
+        {
+            PlaySound(_soundClipDefault);
+        }
+    }
+
+    public virtual void PlaySound(AudioClip clip)
+    {
+        _soundSource.clip = clip;
+        _soundSource.pitch = Random.Range(0.8f, 1.2f);
+        _soundSource.Play();
     }
 
     public virtual void TriggerDialogue()
@@ -126,27 +143,17 @@ public class Interactable : MonoBehaviour
     }
 }
 
-[CustomEditor(typeof(Interactable))]
+[CustomEditor(typeof(Interactable), true)]
 public class Interactable_Editor : Editor
 { 
-    public void Start()
-    {
-       // Interactable interactable = ScriptableObject.CreateInstance<Interactable>();
-      //  SerializedObject serializedObject = new UnityEditor.SerializedObject(interactable);
-       // SerializedProperty serializedArrayAppear = serializedObject.FindProperty("_appearList");
-
-    }
-
     public override void OnInspectorGUI()
     {
-        
-        
         var script = (Interactable)target;
         script._talk = EditorGUILayout.Toggle("Can Talk", script._talk);
 
         if (script._talk)
         {
-            script._talking = EditorGUILayout.Toggle("Is Talking", script._talking);
+            EditorGUI.indentLevel++;
             script._canWalkAway = EditorGUILayout.Toggle("Can Walk Away", script._canWalkAway);
             if (script._canWalkAway)
             {
@@ -158,25 +165,17 @@ public class Interactable_Editor : Editor
             {
                 script._dialogueTimer = EditorGUILayout.FloatField("Max Time :", script._dialogueTimer);
             }
+
+            EditorGUI.indentLevel--;
         }
 
-      //  script._appearObjects = EditorGUILayout.Toggle("Appear Objects", script._appearObjects);
-     //   GameObject[] newAppearObjects = script._appearList;
-      //  if (script._appearObjects)
-     //   {
-        //    for(int i = 0; i < newAppearObjects.Length; i++)
-         //   {
-        //        GameObject obj = newAppearObjects[i];
-       //         obj = EditorGUILayout.ObjectField(newAppearObjects[i], typeof(GameObject)) as GameObject;
-       //     }
-     //   }
-
-        
-       
+        script._playSound = EditorGUILayout.Toggle("Play Sound", script._playSound);
+        if (script._playSound)
+        {
+            EditorGUI.indentLevel++;
+            script._soundClipDefault = (AudioClip)EditorGUILayout.ObjectField("Interact Sound: ", script._soundClipDefault, typeof(AudioClip), false);
+            EditorGUI.indentLevel--;
+        }            
     }
-
-
-
-
 }
 

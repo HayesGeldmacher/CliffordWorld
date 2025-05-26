@@ -24,4 +24,8 @@ public class ItemPickup : Interactable
             
         }
     }
+
 }
+
+
+

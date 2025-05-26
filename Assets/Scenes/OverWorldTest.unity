@@ -207,10 +207,9 @@ MonoBehaviour:
     - ajddf
   _player: {fileID: 0}
   _startedTalking: 0
-  _appearObjects: 0
-  _appearList: []
-  _disappearObjects: 0
-  _disappearList: []
+  _playSound: 0
+  _soundClipDefault: {fileID: 0}
+  _soundSource: {fileID: 0}
 --- !u!65 &86317267
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1915,10 +1914,9 @@ MonoBehaviour:
     _sentences: []
   _player: {fileID: 0}
   _startedTalking: 0
-  _appearObjects: 0
-  _appearList: []
-  _disappearObjects: 0
-  _disappearList: []
+  _playSound: 0
+  _soundClipDefault: {fileID: 0}
+  _soundSource: {fileID: 0}
   _lockValue: keyOne
   _locked: 1
   _lockAnim: {fileID: 0}
@@ -5563,10 +5561,9 @@ MonoBehaviour:
     _sentences: []
   _player: {fileID: 0}
   _startedTalking: 0
-  _appearObjects: 0
-  _appearList: []
-  _disappearObjects: 0
-  _disappearList: []
+  _playSound: 0
+  _soundClipDefault: {fileID: 0}
+  _soundSource: {fileID: 0}
   _item: {fileID: 11400000, guid: 2a229a3a6c92e4c4c8a8a7b935596fbd, type: 2}
 --- !u!1 &998503767
 GameObject:
@@ -6264,7 +6261,7 @@ MonoBehaviour:
   _talk: 1
   _talking: 0
   _canWalkAway: 0
-  _timed: 1
+  _timed: 0
   _dialogueTimer: 5
   _currentDialogueTime: 0
   _dialogueDistance: 5
@@ -6277,10 +6274,9 @@ MonoBehaviour:
     - Cube 3 BOY!
   _player: {fileID: 0}
   _startedTalking: 0
-  _appearObjects: 0
-  _appearList: []
-  _disappearObjects: 0
-  _disappearList: []
+  _playSound: 1
+  _soundClipDefault: {fileID: 0}
+  _soundSource: {fileID: 0}
 --- !u!1 &1042047981
 GameObject:
   m_ObjectHideFlags: 0
@@ -6404,10 +6400,9 @@ MonoBehaviour:
     _sentences: []
   _player: {fileID: 0}
   _startedTalking: 0
-  _appearObjects: 0
-  _appearList: []
-  _disappearObjects: 0
-  _disappearList: []
+  _playSound: 0
+  _soundClipDefault: {fileID: 0}
+  _soundSource: {fileID: 0}
   _item: {fileID: 11400000, guid: f345f43c94f551643b40367bbc25bd77, type: 2}
 --- !u!65 &1109372980
 BoxCollider:
@@ -6991,10 +6986,9 @@ MonoBehaviour:
     _sentences: []
   _player: {fileID: 0}
   _startedTalking: 0
-  _appearObjects: 0
-  _appearList: []
-  _disappearObjects: 0
-  _disappearList: []
+  _playSound: 0
+  _soundClipDefault: {fileID: 0}
+  _soundSource: {fileID: 0}
   _item: {fileID: 11400000, guid: f345f43c94f551643b40367bbc25bd77, type: 2}
 --- !u!65 &1222398396
 BoxCollider:
@@ -11472,10 +11466,9 @@ MonoBehaviour:
     _sentences: []
   _player: {fileID: 0}
   _startedTalking: 0
-  _appearObjects: 0
-  _appearList: []
-  _disappearObjects: 0
-  _disappearList: []
+  _playSound: 0
+  _soundClipDefault: {fileID: 0}
+  _soundSource: {fileID: 0}
   _item: {fileID: 11400000, guid: f345f43c94f551643b40367bbc25bd77, type: 2}
 --- !u!65 &1892602687
 BoxCollider:
@@ -13404,7 +13397,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 667627424439586764}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.04465066, y: 0.0000000021486528, z: 9.603453e-11, w: 0.9990027}
+  m_LocalRotation: {x: -0.04465066, y: -0.0000000021486528, z: -9.603453e-11, w: 0.9990027}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -14059,7 +14052,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3890583136660034478}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.033993524, y: 0.000000034660523, z: -0.0000000011789147,
+  m_LocalRotation: {x: 0.033993524, y: -0.000000034660523, z: 0.0000000011789147,
     w: 0.9994221}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
@@ -15147,7 +15140,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7581501615294283060}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.044650663, y: 0.0000000042973056, z: 1.920691e-10, w: 0.9990027}
+  m_LocalRotation: {x: -0.044650663, y: -0.0000000042973056, z: -1.920691e-10, w: 0.9990027}
   m_LocalPosition: {x: 0, y: 1.66, z: -4.2000003}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
