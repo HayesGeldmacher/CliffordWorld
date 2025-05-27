@@ -12,7 +12,7 @@ public class BattleManager : MonoBehaviour
     public BattleState _nextState;
 
     [Header("Spawning")]
-    public GameObject _playerPref; //just one for prototype - replace with array later for multiple enemies!
+    public GameObject[] _partyMembers; //just one for prototype - replace with array later for multiple enemies!
     public GameObject _enemyPref;
     public Transform[] _playerSpawnPoints;
     public Transform _enemySpawnPoint;
@@ -30,7 +30,8 @@ public class BattleManager : MonoBehaviour
 
     public GameObject _actionSelections;
 
-    public BattleUnit[] _playerUnits;
+
+    public List<BattleUnit> _partyUnits = new List<BattleUnit>();
     public BattleUnit[] _enemyUnits;
 
     
@@ -44,10 +45,21 @@ public class BattleManager : MonoBehaviour
 
     private IEnumerator InitializeBattle()
     {
-         GameObject newPlayer = Instantiate(_playerPref, _playerSpawnPoints[0]);
-        _playerUnit = newPlayer.GetComponent<BattleUnit>();
-        _playerNameText.text = _playerUnit._unitName;
+        //Spawning party members:
+        int partySize = 0;
+        Debug.Log("party size: " + partySize);
+        foreach(GameObject member in _partyMembers)
+        {
+            GameObject newPlayer = Instantiate(_partyMembers[partySize], _playerSpawnPoints[partySize]);
+            _partyUnits.Add(newPlayer.GetComponent<BattleUnit>());
 
+            partySize++;
+
+        }
+        
+
+
+        _playerNameText.text = _partyUnits[0]._unitName;
         GameObject newEnemy = Instantiate(_enemyPref, _enemySpawnPoint);
         _enemyUnit = newEnemy.GetComponent<BattleUnit>();
         _enemyNameText.text = _enemyUnit._unitName;
