@@ -11,13 +11,12 @@ public class BattleManager : MonoBehaviour
     public BattleState _state;
     public BattleState _nextState;
 
-    [Header("Spawning")]
+    [Header("Spawning Fields")]
     public GameObject[] _partyMembers; //just one for prototype - replace with array later for multiple enemies!
     public GameObject _enemyPref;
     public Transform[] _playerSpawnPoints;
     public Transform _enemySpawnPoint;
 
-    private BattleUnit _playerUnit;
     private BattleUnit _enemyUnit;
 
     public TMP_Text _enemyNameText;
@@ -36,6 +35,9 @@ public class BattleManager : MonoBehaviour
 
     [Header("PartyTurns")]
     public BattleUnit _currentPartyMember;
+
+    [Header("HUD Fields")]
+    public BattleHUD _battleHUD;
 
     
     // Start is called before the first frame update
@@ -70,7 +72,7 @@ public class BattleManager : MonoBehaviour
 
         _dialogueText.text = "A terrible presence emerges from the fog...";
 
-        _playerHUD.SetHUD(_playerUnit);
+        _playerHUD.SetHUD(_partyUnits[0]);
         _playerHUD.SetHUDLimited(_enemyUnit);
 
         yield return new WaitForSeconds(2f);
@@ -85,6 +87,7 @@ public class BattleManager : MonoBehaviour
             if (Input.GetButtonDown("Interact"))
             {
                 StartCoroutine(EnterState(_nextState));
+                _battleHUD.ActivateContinue(false);
                 Debug.Log("FUCKYEAHBOY!");
             }
         }
@@ -127,7 +130,7 @@ public class BattleManager : MonoBehaviour
 
     private IEnumerator Wait()
     {
-        Debug.Log("waiting");
+        _battleHUD.ActivateContinue(true);
         yield return new WaitForSeconds(0.1f);
     }
 
@@ -169,27 +172,23 @@ public class BattleManager : MonoBehaviour
         AttackSkill attack = _currentPartyMember._baseAttack;
         if (attack == null) yield break;
         
-        //damage the enemy
-        yield return new WaitForSeconds(0.1f);
-        _dialogueText.text = _currentPartyMember._unitName + " attacked " + _enemyUnit._unitName + " ! ";
         //trigger animation and sound here
-
-        yield return new WaitForSeconds(1f);
         bool hit = _currentPartyMember.AttackSkill(_enemyUnit);
         if (hit)
         {
-            bool isDead = _enemyUnit.CheckAlive();
             _dialogueText.text = _currentPartyMember._unitName + " hit " + _enemyUnit._unitName + " for " + attack._damage + " damage!";
 
-            yield return new WaitForSeconds(1f);
+            bool isDead = _enemyUnit.CheckAlive();
 
             if (isDead)
             {
+                yield return new WaitForSeconds(1f);
                 _state = BattleState.WON;
                 StartCoroutine(BattleEnd());
             }
             else
             {
+                yield return new WaitForSeconds(0.1f);
                 _nextState = BattleState.ENEMYTURN;
                 _state = BattleState.WAIT;
             }
@@ -198,8 +197,10 @@ public class BattleManager : MonoBehaviour
         {
             _dialogueText.text = _currentPartyMember._unitName + " missed!";
             _nextState = BattleState.ENEMYTURN;
-            _state = BattleState.WAIT;
+            StartCoroutine(EnterState(BattleState.WAIT));
         }
+
+        yield return new WaitForSeconds(0.1f);
     }
 
     private IEnumerator EnemyTurn()
@@ -210,8 +211,8 @@ public class BattleManager : MonoBehaviour
 
 
         _nextState = BattleState.PLAYERTURN;
-        _state = BattleState.WAIT;
-        
+        StartCoroutine(EnterState(BattleState.WAIT));
+
     }
 
     //ALL BUTTON LOGIC BELOW:
