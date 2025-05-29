@@ -76,7 +76,8 @@ public class BattleManager : MonoBehaviour
         _playerHUD.SetHUDLimited(_enemyUnit);
 
         yield return new WaitForSeconds(2f);
-        StartCoroutine(EnterState(BattleState.PLAYERTURN));
+        _nextState = BattleState.PLAYERTURN;
+        StartCoroutine(EnterState(BattleState.WAIT));
     }
 
     private void Update()
@@ -87,7 +88,7 @@ public class BattleManager : MonoBehaviour
             if (Input.GetButtonDown("Interact"))
             {
                 StartCoroutine(EnterState(_nextState));
-                _battleHUD.ActivateContinue(false);
+                _battleHUD.ActivateDialoguePointer(false);
                 Debug.Log("FUCKYEAHBOY!");
             }
         }
@@ -130,14 +131,16 @@ public class BattleManager : MonoBehaviour
 
     private IEnumerator Wait()
     {
-        _battleHUD.ActivateContinue(true);
+        _battleHUD.ActivateDialoguePointer(true);
         yield return new WaitForSeconds(0.1f);
     }
 
     private IEnumerator PlayerTurn()
     {
-        _actionSelections.SetActive(true);
+
+        _battleHUD.ActivateActionPointer(true);
         //this is where we determine who is currently active!
+        _dialogueText.text = _currentPartyMember._unitName + " is ready to act...";
         yield return new WaitForSeconds(0.1f);
     }
 
@@ -169,6 +172,7 @@ public class BattleManager : MonoBehaviour
 
     private IEnumerator PlayerAttack()
     {
+        yield return new WaitForSeconds(0.25f);
         AttackSkill attack = _currentPartyMember._baseAttack;
         if (attack == null) yield break;
         
@@ -188,9 +192,9 @@ public class BattleManager : MonoBehaviour
             }
             else
             {
-                yield return new WaitForSeconds(0.1f);
+                yield return new WaitForSeconds(0.25f);
                 _nextState = BattleState.ENEMYTURN;
-                _state = BattleState.WAIT;
+                StartCoroutine(EnterState(BattleState.WAIT));
             }
         }
         else
@@ -220,7 +224,7 @@ public class BattleManager : MonoBehaviour
     public void OnAttackButton()
     {
         if (_state != BattleState.PLAYERTURN) return;
-        _actionSelections.SetActive(false);
+        _battleHUD.ActivateActionPointer(false);
         StartCoroutine(PlayerAttack());
 
     }

@@ -7,17 +7,21 @@ public class BattleHUD : MonoBehaviour
 {
 
 
-    [SerializeField] private Animator _battleDialogueAnim;
+    [SerializeField] private Animator _dialoguePointerAnim;
+    [SerializeField] private Animator _actionPointerAnim;
 
     public void SetButtons(BattleUnit unit)
     {
         
     }
 
-    public void ActivateContinue(bool activate)
+    public void ActivateDialoguePointer(bool activate)
     {
-        Debug.Log("Activated the damn animation!");
-        _battleDialogueAnim.SetBool("appear", activate);
+        _dialoguePointerAnim.SetBool("appear", activate);
     }
     
+    public void ActivateActionPointer(bool activate)
+    {
+        _actionPointerAnim.SetBool("appear", activate);
+    }
 }
