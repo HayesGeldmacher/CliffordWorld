@@ -132,7 +132,7 @@ GameObject:
   - component: {fileID: 12935297}
   - component: {fileID: 12935296}
   m_Layer: 5
-  m_Name: Pointer (1)
+  m_Name: ActionPointer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -145,16 +145,16 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 12935294}
-  m_LocalRotation: {x: 0, y: 0, z: 0.7071068, w: 0.7071068}
+  m_LocalRotation: {x: -0, y: -0, z: 0.7071068, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.51543736, y: 0.51543736, z: 0.51543736}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 1513406987}
+  m_Father: {fileID: 1892105947}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 90}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 162.6, y: 97}
+  m_AnchoredPosition: {x: 124.4, y: 85.1}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &12935296
@@ -170,7 +170,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 0, b: 0, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -2202,7 +2202,7 @@ GameObject:
   - component: {fileID: 787856149}
   - component: {fileID: 787856151}
   m_Layer: 5
-  m_Name: DialogueAppear
+  m_Name: Dialogue
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2339,7 +2339,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 0, b: 0, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -3464,7 +3464,6 @@ RectTransform:
   - {fileID: 1273346798}
   - {fileID: 1150415247}
   - {fileID: 509052789}
-  - {fileID: 12935295}
   m_Father: {fileID: 136475890}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
@@ -3844,7 +3843,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e086c51e08c9a2f4380b4dcad8a56d64, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _battleDialogueAnim: {fileID: 787856151}
+  _dialoguePointerAnim: {fileID: 787856151}
+  _actionPointerAnim: {fileID: 1892105950}
 --- !u!1 &1693594262
 GameObject:
   m_ObjectHideFlags: 0
@@ -4824,7 +4824,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh95512
+  m_Name: pb_Mesh126102
   serializedVersion: 11
   m_SubMeshes:
   - serializedVersion: 2
@@ -5046,8 +5046,9 @@ GameObject:
   - component: {fileID: 1892105947}
   - component: {fileID: 1892105949}
   - component: {fileID: 1892105948}
+  - component: {fileID: 1892105950}
   m_Layer: 5
-  m_Name: AttackButton
+  m_Name: Actions
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5068,6 +5069,7 @@ RectTransform:
   - {fileID: 2118331120}
   - {fileID: 349114029}
   - {fileID: 2012556295}
+  - {fileID: 12935295}
   - {fileID: 1202539192}
   m_Father: {fileID: 1513406987}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -5114,6 +5116,28 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1892105946}
   m_CullTransparentMesh: 1
+--- !u!95 &1892105950
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1892105946}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: e974139fa83bedb4da7da2353977c1d5, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &1915811038
 GameObject:
   m_ObjectHideFlags: 0
@@ -5547,7 +5571,7 @@ GameObject:
   - component: {fileID: 2118331122}
   - component: {fileID: 2118331121}
   m_Layer: 5
-  m_Name: Action1
+  m_Name: AttackButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
