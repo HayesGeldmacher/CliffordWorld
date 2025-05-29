@@ -792,7 +792,7 @@ GameObject:
   - component: {fileID: 349114031}
   - component: {fileID: 349114030}
   m_Layer: 5
-  m_Name: Action2
+  m_Name: SkillButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2801,7 +2801,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1202539192
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3499,6 +3499,9 @@ MonoBehaviour:
   _currentHP: 15
   _currentAP: 0
   _maxAP: 0
+  _baseAttack: {fileID: 0}
+  _targetSkills: []
+  _noTargetSkills: []
 --- !u!1 &1583275208
 GameObject:
   m_ObjectHideFlags: 0
@@ -4262,6 +4265,9 @@ MonoBehaviour:
   _currentHP: 25
   _currentAP: 0
   _maxAP: 0
+  _baseAttack: {fileID: 0}
+  _targetSkills: []
+  _noTargetSkills: []
 --- !u!1 &1796969024
 GameObject:
   m_ObjectHideFlags: 0
@@ -4779,7 +4785,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh100978
+  m_Name: pb_Mesh60746
   serializedVersion: 11
   m_SubMeshes:
   - serializedVersion: 2
@@ -5002,7 +5008,7 @@ GameObject:
   - component: {fileID: 1892105949}
   - component: {fileID: 1892105948}
   m_Layer: 5
-  m_Name: ActionSelection
+  m_Name: AttackButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5247,7 +5253,7 @@ GameObject:
   - component: {fileID: 2012556297}
   - component: {fileID: 2012556296}
   m_Layer: 5
-  m_Name: Action3
+  m_Name: EscapeButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5689,6 +5695,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6326927037511716633, guid: ffff8f4a8043f494ca058e7ecd873ac9,
+        type: 3}
+      propertyPath: _skills.Array.size
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

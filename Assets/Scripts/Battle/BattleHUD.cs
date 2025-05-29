@@ -2,17 +2,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.UI;
 public class BattleHUD : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
 
-    // Update is called once per frame
-    void Update()
+    public Button _attackButton;
+    public Button _skillButton;
+    public Button _escapeButton;
+
+    public void SetButtons(BattleUnit unit)
     {
         
     }
+    
 }

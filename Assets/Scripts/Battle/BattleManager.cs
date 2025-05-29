@@ -7,7 +7,7 @@ using TMPro;
 public class BattleManager : MonoBehaviour
 {
 
-    public enum BattleState {START, PLAYERTURN, ENEMYTURN, WON, LOST, WAIT }
+    public enum BattleState { START, PLAYERTURN, ENEMYTURN, WON, LOST, WAIT }
     public BattleState _state;
     public BattleState _nextState;
 
@@ -33,6 +33,9 @@ public class BattleManager : MonoBehaviour
 
     public List<BattleUnit> _partyUnits = new List<BattleUnit>();
     public BattleUnit[] _enemyUnits;
+
+    [Header("PartyTurns")]
+    public BattleUnit _currentPartyMember;
 
     
     // Start is called before the first frame update
@@ -173,13 +176,6 @@ public class BattleManager : MonoBehaviour
         }
     }
 
-    public void OnAttackButton()
-    {
-        if (_state != BattleState.PLAYERTURN) return;
-        _actionSelections.SetActive(false);
-        StartCoroutine(PlayerAttack());
-
-    }
 
     private IEnumerator PlayerAttack()
     {
@@ -208,5 +204,29 @@ public class BattleManager : MonoBehaviour
     private void RemoveActionsHUD()
     {
         _actionSelections.SetActive(false);
+    }
+
+
+
+
+
+    //ALL BUTTON LOGIC BELOW:
+    //Button presses are handled in battlemanager, but logic happens in BattleUnit
+    public void OnAttackButton()
+    {
+        if (_state != BattleState.PLAYERTURN) return;
+        _currentPartyMember.AttackSkill(_enemyUnit);
+
+        _actionSelections.SetActive(false);
+        StartCoroutine(PlayerAttack());
+
+    }
+
+    public void OnSkillBUtton()
+    {
+        //check if skill is targeted or non-targeted
+
+        //battleunit.nontargetskill(nontargetskill)
+        //battleunit.targettskill(targetskill)
     }
 }

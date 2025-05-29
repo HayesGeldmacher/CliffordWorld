@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9978c7793d483445be5299e23531541, type: 3}
+  m_Name: EscapeSkill
+  m_EditorClassIdentifier: 
+  _name: Escape
+  _description: Attempt to run away from the battle
+  _APCost: 0
+  _HPCost: 0
+  _limited: 0
+  _uses: 0
+  _coolDownTurns: 0
+  _random: 1
+  _successChance: 50

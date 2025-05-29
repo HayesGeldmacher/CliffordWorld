@@ -156,3 +156,11 @@ MonoBehaviour:
   _damage: 10
   _maxHP: 30
   _currentHP: 28
+  _currentAP: 0
+  _maxAP: 0
+  _baseAttack: {fileID: 11400000, guid: d929ac3b07933cf4db700370dd31a5b8, type: 2}
+  _targetSkills:
+  - {fileID: 0}
+  - {fileID: 0}
+  _noTargetSkills:
+  - {fileID: 0}
