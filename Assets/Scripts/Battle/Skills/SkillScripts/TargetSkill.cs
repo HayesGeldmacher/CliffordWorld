@@ -23,7 +23,7 @@ public class TargetSkill : ScriptableObject
     public bool _random = false;
     public int _successChance;
 
-   public virtual void Use(BattleUnit caster, BattleUnit target)
+   public virtual bool Use(BattleUnit caster, BattleUnit target)
     {
         if (_random)
         {
@@ -31,15 +31,18 @@ public class TargetSkill : ScriptableObject
             if(_successChance >= randomInt)
             {
                 Hit(caster, target);
+                return true;
             }
             else
             {
                 Miss(caster);
+                return false;
             }
         }
         else
         {
             Hit(caster, target);
+            return true;
         }   
     } 
 

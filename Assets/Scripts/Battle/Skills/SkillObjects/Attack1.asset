@@ -16,7 +16,9 @@ MonoBehaviour:
   _description: Attacks the target for base damage.
   _APCost: 0
   _HPCost: 0
-  limited: 0
+  _limited: 0
   _uses: 0
   _coolDownTurns: 0
-  _damage: 20
+  _random: 0
+  _successChance: 0
+  _damage: 40

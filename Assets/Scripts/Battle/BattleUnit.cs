@@ -14,7 +14,7 @@ public class BattleUnit : MonoBehaviour
     public int _maxAP;
 
     [Header("Skills")]
-    public TargetSkill _baseAttack;
+    public AttackSkill _baseAttack;
     public TargetSkill[] _targetSkills;
     public NoTargetSkill[] _noTargetSkills;
     
@@ -30,10 +30,21 @@ public class BattleUnit : MonoBehaviour
         
     }
     
-    public bool TakeDamage(float damage)
+    public void TakeDamage(float damage)
     {
         _currentHP -= _damage;
-        if(_currentHP <= 0)
+        
+    }
+
+    public bool AttackSkill(BattleUnit target)
+    {
+       bool hit = _baseAttack.Use(this, target);
+        return hit;
+    }
+
+    public bool CheckAlive()
+    {
+        if (_currentHP <= 0)
         {
             return true;
         }
@@ -41,10 +52,5 @@ public class BattleUnit : MonoBehaviour
         {
             return false;
         }
-    }
-
-    public void AttackSkill(BattleUnit target)
-    {
-        _baseAttack.Use(this, target);
     }
 }

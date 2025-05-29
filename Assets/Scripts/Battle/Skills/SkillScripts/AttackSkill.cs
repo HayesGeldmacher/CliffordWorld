@@ -9,14 +9,17 @@ public class AttackSkill : TargetSkill
     public int _damage;
     
     
-    public override void Use(BattleUnit caster, BattleUnit target)
+    public override bool Use(BattleUnit caster, BattleUnit target)
     {
         base.Use(caster, target);
+
+        return true;
     }
 
     public override void Hit(BattleUnit caster, BattleUnit target)
     {
         base.Hit(caster, target);
+        target.TakeDamage(_damage);
     }
 
     public override void Miss(BattleUnit caster)

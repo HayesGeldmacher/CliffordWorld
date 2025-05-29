@@ -59,8 +59,9 @@ public class BattleManager : MonoBehaviour
             partySize++;
 
         }
-        
 
+        //Setting first party member to current PM:
+        _currentPartyMember = _partyUnits[0];
 
         _playerNameText.text = _partyUnits[0]._unitName;
         GameObject newEnemy = Instantiate(_enemyPref, _enemySpawnPoint);
@@ -73,8 +74,7 @@ public class BattleManager : MonoBehaviour
         _playerHUD.SetHUDLimited(_enemyUnit);
 
         yield return new WaitForSeconds(2f);
-        _state = BattleState.PLAYERTURN;
-        PlayerTurn();
+        StartCoroutine(EnterState(BattleState.PLAYERTURN));
     }
 
     private void Update()
@@ -152,54 +152,10 @@ public class BattleManager : MonoBehaviour
         }
     }
 
-    private IEnumerator EnemyTurn()
-    {
-        //damage the player
-        yield return new WaitForSeconds(0.1f);
-        _dialogueText.text = _enemyUnit._unitName + " lashes out at Clifford!";
-        Debug.Log("attacked the enemy!");
-
-        float attackDamage = _enemyUnit._damage;
-        bool isDead = _playerUnit.TakeDamage(attackDamage);
-        _dialogueText.text =  _enemyUnit._unitName + " attacked Clifford for " + attackDamage + " damage!";
-
-        yield return new WaitForSeconds(1f);
-        if (isDead)
-        {
-            _state = BattleState.LOST;
-            StartCoroutine(BattleEnd());
-        }
-        else
-        {
-            _nextState = BattleState.PLAYERTURN;
-            _state = BattleState.WAIT;
-        }
-    }
+   
 
 
-    private IEnumerator PlayerAttack()
-    {
-        //damage the enemy
-        yield return new WaitForSeconds(0.1f);
-        Debug.Log("attacked the enemy!");
-
-        float attackDamage = _playerUnit._damage;
-        bool isDead = _enemyUnit.TakeDamage(attackDamage);
-        _dialogueText.text = "Clifford attacked " + _enemyUnit._unitName + " for " + attackDamage + " damage!";
-
-        yield return new WaitForSeconds(1f);
-
-;        if (isDead)
-        {
-            _state = BattleState.WON;
-            StartCoroutine(BattleEnd());
-        }
-        else
-        {
-            _nextState = BattleState.ENEMYTURN;
-            _state = BattleState.WAIT;
-        }
-    }
+ 
 
     private void RemoveActionsHUD()
     {
@@ -208,15 +164,61 @@ public class BattleManager : MonoBehaviour
 
 
 
+    private IEnumerator PlayerAttack()
+    {
+        AttackSkill attack = _currentPartyMember._baseAttack;
+        if (attack == null) yield break;
+        
+        //damage the enemy
+        yield return new WaitForSeconds(0.1f);
+        _dialogueText.text = _currentPartyMember._unitName + " attacked " + _enemyUnit._unitName + " ! ";
+        //trigger animation and sound here
 
+        yield return new WaitForSeconds(1f);
+        bool hit = _currentPartyMember.AttackSkill(_enemyUnit);
+        if (hit)
+        {
+            bool isDead = _enemyUnit.CheckAlive();
+            _dialogueText.text = _currentPartyMember._unitName + " hit " + _enemyUnit._unitName + " for " + attack._damage + " damage!";
+
+            yield return new WaitForSeconds(1f);
+
+            if (isDead)
+            {
+                _state = BattleState.WON;
+                StartCoroutine(BattleEnd());
+            }
+            else
+            {
+                _nextState = BattleState.ENEMYTURN;
+                _state = BattleState.WAIT;
+            }
+        }
+        else
+        {
+            _dialogueText.text = _currentPartyMember._unitName + " missed!";
+            _nextState = BattleState.ENEMYTURN;
+            _state = BattleState.WAIT;
+        }
+    }
+
+    private IEnumerator EnemyTurn()
+    {
+        //damage the player
+        yield return new WaitForSeconds(0.1f);
+        _dialogueText.text = _enemyUnit._unitName + " lashes out at Clifford!";
+
+
+        _nextState = BattleState.PLAYERTURN;
+        _state = BattleState.WAIT;
+        
+    }
 
     //ALL BUTTON LOGIC BELOW:
     //Button presses are handled in battlemanager, but logic happens in BattleUnit
     public void OnAttackButton()
     {
         if (_state != BattleState.PLAYERTURN) return;
-        _currentPartyMember.AttackSkill(_enemyUnit);
-
         _actionSelections.SetActive(false);
         StartCoroutine(PlayerAttack());
 
