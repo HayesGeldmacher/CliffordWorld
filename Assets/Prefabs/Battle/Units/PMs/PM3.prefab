@@ -151,10 +151,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c4dc723fc65b2384086a0f6adb201eb1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _unitName: Little Slug
+  _unitName: slackjaw
   _unitLevel: 4
   _damage: 10
   _maxHP: 30
   _currentHP: 28
   _currentAP: 50
   _maxAP: 80
+  _baseAttack: {fileID: 11400000, guid: 4d329a75332a4d449ae20376551eaf23, type: 2}
+  _targetSkills: []
+  _noTargetSkills: []

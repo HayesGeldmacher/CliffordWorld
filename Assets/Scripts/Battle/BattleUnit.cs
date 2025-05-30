@@ -17,6 +17,9 @@ public class BattleUnit : MonoBehaviour
     public AttackSkill _baseAttack;
     public TargetSkill[] _targetSkills;
     public NoTargetSkill[] _noTargetSkills;
+
+    [Header("Hud")]
+    public BattleUnitHUD _hud;
     
     // Start is called beforde the first frame update
     void Start()
@@ -52,5 +55,15 @@ public class BattleUnit : MonoBehaviour
         {
             return false;
         }
+    }
+
+    public void UpdateStats()
+    {
+        _hud.SetHUD(this);
+    }
+
+    public void UpdateEnemyStats()
+    {
+        _hud.SetEnemyHUD(this);
     }
 }

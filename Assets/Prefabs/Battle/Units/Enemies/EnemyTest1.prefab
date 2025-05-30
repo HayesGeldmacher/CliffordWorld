@@ -50,6 +50,11 @@ MonoBehaviour:
   _damage: 50
   _maxHP: 200
   _currentHP: 200
+  _currentAP: 0
+  _maxAP: 0
+  _baseAttack: {fileID: 11400000, guid: d121dd3b0204744448721529eda2cf13, type: 2}
+  _targetSkills: []
+  _noTargetSkills: []
 --- !u!1 &5940506940346745423
 GameObject:
   m_ObjectHideFlags: 0

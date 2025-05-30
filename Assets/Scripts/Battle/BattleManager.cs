@@ -35,9 +35,11 @@ public class BattleManager : MonoBehaviour
 
     [Header("PartyTurns")]
     public BattleUnit _currentPartyMember;
+    public int _partyTracker;
 
     [Header("HUD Fields")]
     public BattleHUD _battleHUD;
+    public BattleUnitHUD _partyHUDs;
 
     
     // Start is called before the first frame update
@@ -71,9 +73,6 @@ public class BattleManager : MonoBehaviour
         _enemyNameText.text = _enemyUnit._unitName;
 
         _dialogueText.text = "A terrible presence emerges from the fog...";
-
-        _playerHUD.SetHUD(_partyUnits[0]);
-        _playerHUD.SetHUDLimited(_enemyUnit);
 
         yield return new WaitForSeconds(2f);
         _nextState = BattleState.PLAYERTURN;
@@ -137,7 +136,8 @@ public class BattleManager : MonoBehaviour
 
     private IEnumerator PlayerTurn()
     {
-
+        _currentPartyMember = _partyUnits[_partyTracker];
+        _playerNameText.text = _currentPartyMember._unitName;
         _battleHUD.ActivateActionPointer(true);
         //this is where we determine who is currently active!
         _dialogueText.text = _currentPartyMember._unitName + " is ready to act...";
@@ -193,30 +193,72 @@ public class BattleManager : MonoBehaviour
             else
             {
                 yield return new WaitForSeconds(0.25f);
-                _nextState = BattleState.ENEMYTURN;
-                StartCoroutine(EnterState(BattleState.WAIT));
+                EndPlayerTurn();
             }
         }
         else
         {
             _dialogueText.text = _currentPartyMember._unitName + " missed!";
-            _nextState = BattleState.ENEMYTURN;
-            StartCoroutine(EnterState(BattleState.WAIT));
+            EndPlayerTurn();
         }
 
         yield return new WaitForSeconds(0.1f);
+    }
+
+    private void EndPlayerTurn()
+    {
+
+        _partyTracker++;
+
+        if (_partyTracker >= _partyUnits.Count)
+        {
+            _nextState = BattleState.ENEMYTURN;
+            _partyTracker = 0;
+        }
+        else
+        {
+            _nextState = BattleState.PLAYERTURN;
+        }
+
+        StartCoroutine(EnterState(BattleState.WAIT));
     }
 
     private IEnumerator EnemyTurn()
     {
         //damage the player
         yield return new WaitForSeconds(0.1f);
-        _dialogueText.text = _enemyUnit._unitName + " lashes out at Clifford!";
 
+        AttackSkill attack = _enemyUnit._baseAttack;
+        if (attack == null) yield break;
 
-        _nextState = BattleState.PLAYERTURN;
-        StartCoroutine(EnterState(BattleState.WAIT));
+        //trigger animation and sound here
+        BattleUnit target = _partyUnits[Random.Range(0, _partyUnits.Count)];
+        bool hit = _currentPartyMember.AttackSkill(_enemyUnit);
+        if (hit)
+        {
+            _dialogueText.text = _enemyUnit._unitName + " lashes out at " + target._unitName + " for " + attack._damage + " damage!";
 
+            bool isDead = target.CheckAlive();
+
+            if (isDead)
+            {
+                yield return new WaitForSeconds(1f);
+                _state = BattleState.LOST;
+                StartCoroutine(BattleEnd());
+            }
+            else
+            {
+                yield return new WaitForSeconds(0.25f);
+                _nextState = BattleState.PLAYERTURN;
+                StartCoroutine(EnterState(BattleState.WAIT));
+            }
+        }
+        else
+        {
+            _dialogueText.text = _currentPartyMember._unitName + " missed!";
+            _nextState = BattleState.PLAYERTURN;
+            StartCoroutine(EnterState(BattleState.WAIT));
+        }
     }
 
     //ALL BUTTON LOGIC BELOW:
