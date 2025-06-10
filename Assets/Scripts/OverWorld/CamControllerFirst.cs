@@ -9,6 +9,7 @@ public class CamControllerFirst : MonoBehaviour
     [SerializeField] private float _sensitivityX;
     [SerializeField] private float _sensitivityY;
 
+    [HideInInspector] public bool frozen = false;
     [SerializeField] private bool _canTurnX = true;
     [SerializeField] private bool _canTurnY = true;
 
@@ -25,9 +26,21 @@ public class CamControllerFirst : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (frozen) return;
+
         //getting mouse input
         float mouseX = Input.GetAxis("Mouse X") * _sensitivityX;
         float mouseY = Input.GetAxis("Mouse Y") * _sensitivityY;
+
+        if (!_canTurnX)
+        {
+            mouseX = 0;
+        }
+
+        if (!_canTurnY)
+        {
+            mouseY = 0;
+        }
 
         //transforming mouse to cam input
         rotationX -= mouseY;

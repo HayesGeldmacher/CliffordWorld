@@ -57,6 +57,7 @@ public class CameraManager : MonoBehaviour
         OverWorldPC.instance.TriggerCamChange(state);
 
     }
+   
     public void EnterFirst()
     {
         
@@ -97,4 +98,19 @@ public class CameraManager : MonoBehaviour
         }
     }
 
+    public void MoveFixed(Transform newPosition)
+    {
+        Transform fixedCamera = _playerCams[1].GetComponent<Transform>();
+        fixedCamera.position = newPosition.position;
+        fixedCamera.rotation = newPosition.rotation;
+    }
+
+    public void TeleportPlayer(Transform newPosition)
+    {
+        Debug.Log("Teleported!!!!");
+        CharacterController controller = transform.GetComponent<CharacterController>();
+        controller.enabled = false;
+        transform.position = newPosition.position;
+        controller.enabled = true;
+    }
 }

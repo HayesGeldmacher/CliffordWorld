@@ -6,6 +6,7 @@ public class GameManagerOverWorld : MonoBehaviour
 {
     public bool paused = false;
     [SerializeField] private GameObject _puaseMenu;
+    [SerializeField] private CamControllerFirst _camControlFirst;
     
     // Start is called before the first frame update
     void Start()
@@ -28,10 +29,12 @@ public class GameManagerOverWorld : MonoBehaviour
         if (freeze)
         {
             Time.timeScale = 0;
+            _camControlFirst.frozen = true;
         }
         else
         {
             Time.timeScale = 1f;
+            _camControlFirst.frozen = false;
         }
 
         _puaseMenu.SetActive(freeze);
