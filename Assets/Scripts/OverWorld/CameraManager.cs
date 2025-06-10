@@ -29,6 +29,7 @@ public class CameraManager : MonoBehaviour
     //Cam 1 = Fixed
     //Cam 2 = Third
     [SerializeField] private Camera[] _playerCams;
+    
 
     public void TriggerCamChange(CameraState newState)
     {
@@ -53,9 +54,12 @@ public class CameraManager : MonoBehaviour
                 break;
         }
 
+        OverWorldPC.instance.TriggerCamChange(state);
+
     }
     public void EnterFirst()
     {
+        
         _playerCams[0].enabled = true;
 
         foreach(Camera cam in _playerCams)
