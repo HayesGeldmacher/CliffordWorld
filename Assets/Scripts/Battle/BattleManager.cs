@@ -41,6 +41,10 @@ public class BattleManager : MonoBehaviour
     public BattleHUD _battleHUD;
     public BattleUnitHUD _partyHUDs;
 
+    [Header("Timing Fields")]
+    public float _maxTurnWait;
+    public float _currentWaitTime;
+
     
     // Start is called before the first frame update
     void Start()
@@ -74,9 +78,9 @@ public class BattleManager : MonoBehaviour
 
         _dialogueText.text = "A terrible presence emerges from the fog...";
 
-        yield return new WaitForSeconds(2f);
         _nextState = BattleState.PLAYERTURN;
         StartCoroutine(EnterState(BattleState.WAIT));
+        yield return new WaitForSeconds(0.1f);
     }
 
     private void Update()
@@ -84,11 +88,22 @@ public class BattleManager : MonoBehaviour
 
         if(_state == BattleState.WAIT)
         {
+
+            _currentWaitTime -= Time.deltaTime;
+            if(_currentWaitTime <= 0)
+            {
+                 StartCoroutine(EnterState(_nextState));
+                 _battleHUD.ActivateDialoguePointer(false);
+                 Debug.Log("FUCKYEAHBOY!");
+            }
+
+
+
             if (Input.GetButtonDown("Interact"))
             {
-                StartCoroutine(EnterState(_nextState));
-                _battleHUD.ActivateDialoguePointer(false);
-                Debug.Log("FUCKYEAHBOY!");
+               // StartCoroutine(EnterState(_nextState));
+              //  _battleHUD.ActivateDialoguePointer(false);
+              //  Debug.Log("FUCKYEAHBOY!");
             }
         }
     }
@@ -130,15 +145,16 @@ public class BattleManager : MonoBehaviour
 
     private IEnumerator Wait()
     {
-        _battleHUD.ActivateDialoguePointer(true);
+        _currentWaitTime = _maxTurnWait;
+       // _battleHUD.ActivateDialoguePointer(true);
         yield return new WaitForSeconds(0.1f);
     }
 
     private IEnumerator PlayerTurn()
     {
+        _battleHUD.ActivatePlayerActionButtons(true);
         _currentPartyMember = _partyUnits[_partyTracker];
         _playerNameText.text = _currentPartyMember._unitName;
-        _battleHUD.ActivateActionPointer(true);
         //this is where we determine who is currently active!
         _dialogueText.text = _currentPartyMember._unitName + " is ready to act...";
         yield return new WaitForSeconds(0.1f);
@@ -266,7 +282,7 @@ public class BattleManager : MonoBehaviour
     public void OnAttackButton()
     {
         if (_state != BattleState.PLAYERTURN) return;
-        _battleHUD.ActivateActionPointer(false);
+        _battleHUD.ActivatePlayerActionButtons(false);
         StartCoroutine(PlayerAttack());
 
     }

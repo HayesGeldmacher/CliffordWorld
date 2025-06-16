@@ -7,7 +7,27 @@ public class GameManagerOverWorld : MonoBehaviour
     public bool paused = false;
     [SerializeField] private GameObject _puaseMenu;
     [SerializeField] private CamControllerFirst _camControlFirst;
-    
+
+
+    //Creating unique global reference to OverWorldPC
+    #region Singleton
+
+    public static GameManagerOverWorld instance;
+
+    void Awake()
+    {
+        if (instance != null)
+        {
+            Debug.LogWarning("More than one instance of playercontroller present!! NOT GOOD!");
+            return;
+        }
+
+        instance = this;
+    }
+
+    #endregion
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -39,5 +59,10 @@ public class GameManagerOverWorld : MonoBehaviour
 
         _puaseMenu.SetActive(freeze);
 
+    }
+
+    public void EnterCombatScene(Enemy enemy)
+    {
+        Debug.Log("entering overworld with " + enemy.name);
     }
 }

@@ -9,6 +9,7 @@ public class BattleHUD : MonoBehaviour
 
     [SerializeField] private Animator _dialoguePointerAnim;
     [SerializeField] private Animator _actionPointerAnim;
+    [SerializeField] private Animator _playerActionButtons;
 
     public void SetButtons(BattleUnit unit)
     {
@@ -20,8 +21,8 @@ public class BattleHUD : MonoBehaviour
         _dialoguePointerAnim.SetBool("appear", activate);
     }
     
-    public void ActivateActionPointer(bool activate)
+    public void ActivatePlayerActionButtons(bool activate)
     {
-        _actionPointerAnim.SetBool("appear", activate);
+        _playerActionButtons.SetBool("appear", activate);
     }
 }
