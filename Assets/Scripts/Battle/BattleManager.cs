@@ -15,7 +15,7 @@ public class BattleManager : MonoBehaviour
     public GameObject[] _partyMembers; //just one for prototype - replace with array later for multiple enemies!
     public GameObject _enemyPref;
     public Transform[] _playerSpawnPoints;
-    public Transform _enemySpawnPoint;
+    public Transform[] _enemySpawnPoints;
 
     [Header("Arena Fields")]
     public GameObject _defaultArena;
@@ -84,6 +84,7 @@ public class BattleManager : MonoBehaviour
 
         _currentArena = arena.GetComponent<ArenaDataStore>();
         _playerSpawnPoints = _currentArena._playerSpawns;
+        _enemySpawnPoints = _currentArena._enemySpawns;
 
         //Spawning party members:
         int partySize = 0;
@@ -99,14 +100,16 @@ public class BattleManager : MonoBehaviour
 
         //Setting first party member to current PM:
         _currentPartyMember = _partyUnits[0];
-
         _playerNameText.text = _partyUnits[0]._unitName;
-        GameObject newEnemy = Instantiate(_enemyPref, _enemySpawnPoint);
+
+        //Spawning enemies
+        GameObject newEnemy = Instantiate(_enemyPref, _enemySpawnPoints[0]);
         _enemyUnit = newEnemy.GetComponent<BattleUnit>();
         _enemyNameText.text = _enemyUnit._unitName;
 
         _dialogueText.text = "A terrible presence emerges from the fog...";
 
+        //Setting up battle states
         _nextState = BattleState.PLAYERTURN;
         StartCoroutine(EnterState(BattleState.WAIT));
         yield return new WaitForSeconds(0.1f);

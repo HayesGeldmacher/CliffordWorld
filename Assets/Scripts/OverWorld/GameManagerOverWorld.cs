@@ -33,6 +33,9 @@ public class GameManagerOverWorld : MonoBehaviour
     void Start()
     {
         paused = false;
+
+        //lock and hide that damn mouse cursor!
+        ActivateCursor(false);
     }
 
     // Update is called once per frame
@@ -62,10 +65,27 @@ public class GameManagerOverWorld : MonoBehaviour
 
     }
 
+    public void ActivateCursor(bool activate)
+    {
+        if (activate)
+        {
+            Cursor.lockState = CursorLockMode.Confined;
+            Cursor.visible = true;
+        }
+        else
+        {
+            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false;
+        }
+    }
+
+
     public void EnterCombatScene(Enemy enemy)
     {
+        ActivateCursor(true);
+
         Debug.Log("entering overworld with " + enemy.name);
-        MapStateData.instance._currentEnemy = enemy;
-        SceneManager.LoadScene("BattleTestScene1", LoadSceneMode.Additive);
+        MapStateData.instance.CreateEnemy(enemy);
+        SceneManager.LoadScene("BattleTestScene1");
     }
 }
