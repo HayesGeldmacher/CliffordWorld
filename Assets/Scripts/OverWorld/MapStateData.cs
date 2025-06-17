@@ -31,4 +31,14 @@ public class MapStateData : MonoBehaviour
     }
 
     #endregion
+
+
+    public void CreateEnemy(Enemy enemy)
+    {
+        GameObject newEnemy = enemy.gameObject;
+        DontDestroyOnLoad(newEnemy);
+        newEnemy.transform.parent = this.transform;
+        _currentEnemy = newEnemy.GetComponent<Enemy>(); 
+        
+    }
 }

@@ -67,10 +67,6 @@ public class OverWorldPC : MonoBehaviour
         _collider = GetComponent<CapsuleCollider>();
         _controller = GetComponent<CharacterController>();
 
-        //lock and hide that damn mouse cursor!
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
-
         _camState = CameraState.THIRD;
     }
 
