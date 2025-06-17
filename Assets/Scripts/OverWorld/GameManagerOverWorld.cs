@@ -1,11 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement; 
 
 public class GameManagerOverWorld : MonoBehaviour
 {
     public bool paused = false;
-    [SerializeField] private GameObject _puaseMenu;
+    [SerializeField] private GameObject _pauseMenu;
     [SerializeField] private CamControllerFirst _camControlFirst;
 
 
@@ -57,12 +58,14 @@ public class GameManagerOverWorld : MonoBehaviour
             _camControlFirst.frozen = false;
         }
 
-        _puaseMenu.SetActive(freeze);
+        _pauseMenu.SetActive(freeze);
 
     }
 
     public void EnterCombatScene(Enemy enemy)
     {
         Debug.Log("entering overworld with " + enemy.name);
+        MapStateData.instance._currentEnemy = enemy;
+        SceneManager.LoadScene("BattleTestScene1", LoadSceneMode.Additive);
     }
 }

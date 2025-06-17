@@ -17,6 +17,10 @@ public class BattleManager : MonoBehaviour
     public Transform[] _playerSpawnPoints;
     public Transform _enemySpawnPoint;
 
+    [Header("Arena Fields")]
+    public GameObject _defaultArena;
+    public Transform _arenaSpawnPoint;
+
     private BattleUnit _enemyUnit;
 
     public TMP_Text _enemyNameText;
@@ -56,8 +60,30 @@ public class BattleManager : MonoBehaviour
 
     private IEnumerator InitializeBattle()
     {
-        //Spawning party members:
-        int partySize = 0;
+
+        //Initialize Background, theme, music, etc
+        if(MapStateData.instance != null)
+        {
+            Enemy enemy = MapStateData.instance._currentEnemy;
+            if(enemy != null)
+            {
+                GameObject arena = Instantiate(enemy._arena, _arenaSpawnPoint);
+            }
+            else
+            {
+                GameObject arena = Instantiate(_defaultArena, _arenaSpawnPoint);
+            }
+
+        }
+        else
+        {
+          GameObject arena = Instantiate(_defaultArena, _arenaSpawnPoint);
+        }
+        
+        
+
+            //Spawning party members:
+            int partySize = 0;
         Debug.Log("party size: " + partySize);
         foreach(GameObject member in _partyMembers)
         {

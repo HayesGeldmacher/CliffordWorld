@@ -4,11 +4,15 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
+
+    [Header("Battle Fields")]
+    public GameObject _arena;
+
+    
     private void OnTriggerEnter(Collider other)
     {
         if (other.tag == "Player")
         {
-            Debug.Log("HIT ENEMY~!");
             GameManagerOverWorld.instance.EnterCombatScene(this);
         }
     }

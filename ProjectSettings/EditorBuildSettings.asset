@@ -11,5 +11,8 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/BattleTestScenes/BattleTestScene1.unity
     guid: ed02ab393b9195a4aa40c193220c8bc8
+  - enabled: 1
+    path: Assets/Scenes/Levels/RustLevelPrototype/RustLevelPrototype.unity
+    guid: ad46a642f66afa0478ea0fab5f22e367
   m_configObjects: {}
   m_UseUCBPForAssetBundles: 0
