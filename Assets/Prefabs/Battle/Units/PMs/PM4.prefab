@@ -29,8 +29,8 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: 0.66452664, z: -0.7472646, w: 0}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.099547364, y: 0.099547364, z: 0.099547364}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 0.15, y: 0.15, z: 0.15}
+  m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 5059456222625524213}
   m_LocalEulerAnglesHint: {x: 96.70801, y: 180, z: 0}
@@ -158,3 +158,7 @@ MonoBehaviour:
   _currentHP: 28
   _currentAP: 50
   _maxAP: 80
+  _baseAttack: {fileID: 0}
+  _targetSkills: []
+  _noTargetSkills: []
+  _hud: {fileID: 0}

@@ -13,6 +13,8 @@ public class MapStateData : MonoBehaviour
 
     [Header("Battle Fields")]
     public Enemy _currentEnemy;
+    public int _playerPartyCount;
+
 
 
     void Awake()

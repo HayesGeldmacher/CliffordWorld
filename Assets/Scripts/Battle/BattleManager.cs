@@ -20,6 +20,7 @@ public class BattleManager : MonoBehaviour
     [Header("Arena Fields")]
     public GameObject _defaultArena;
     public Transform _arenaSpawnPoint;
+    private ArenaDataStore _currentArena;
 
     private BattleUnit _enemyUnit;
 
@@ -62,28 +63,30 @@ public class BattleManager : MonoBehaviour
     {
 
         //Initialize Background, theme, music, etc
-        if(MapStateData.instance != null)
+        GameObject arena;
+        if (MapStateData.instance != null)
         {
             Enemy enemy = MapStateData.instance._currentEnemy;
             if(enemy != null)
             {
-                GameObject arena = Instantiate(enemy._arena, _arenaSpawnPoint);
+                arena = Instantiate(enemy._arena, _arenaSpawnPoint);
             }
             else
             {
-                GameObject arena = Instantiate(_defaultArena, _arenaSpawnPoint);
+                arena = Instantiate(_defaultArena, _arenaSpawnPoint);
             }
 
         }
         else
         {
-          GameObject arena = Instantiate(_defaultArena, _arenaSpawnPoint);
+          arena = Instantiate(_defaultArena, _arenaSpawnPoint);
         }
-        
-        
 
-            //Spawning party members:
-            int partySize = 0;
+        _currentArena = arena.GetComponent<ArenaDataStore>();
+        _playerSpawnPoints = _currentArena._playerSpawns;
+
+        //Spawning party members:
+        int partySize = 0;
         Debug.Log("party size: " + partySize);
         foreach(GameObject member in _partyMembers)
         {
