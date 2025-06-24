@@ -9,13 +9,13 @@ public class OverWorldPC : MonoBehaviour
     private CharacterController _controller;
     private CapsuleCollider _collider;
 
-    [Header("Movement Variables")]
+    [Header("Movement Fields")]
     [SerializeField] private float _walkSpeed;
     [SerializeField] private float _runSpeed;
     [SerializeField] private float _turnSpeed;
     [SerializeField] private float _accelRate;
-    private bool _walking;
-    private bool _running;
+    public bool _walking;
+    public bool _running;
 
     private float x;
     private float z;
@@ -28,7 +28,7 @@ public class OverWorldPC : MonoBehaviour
     [SerializeField] private Transform _cameraThird;
     [SerializeField] private CamControllerFirst _camControlFirst;
 
-    [Header("Grounded Variables")]
+    [Header("Grounded Fields")]
     [SerializeField] private Transform _groundCheck;
     [SerializeField] private float _groundRange;
     [SerializeField] private LayerMask _groundMask;
@@ -154,7 +154,18 @@ public class OverWorldPC : MonoBehaviour
         x = Input.GetAxisRaw("Horizontal");
         z = Input.GetAxisRaw("Vertical");
 
-        //Get target speed 
+
+        //Set running/walking
+        float moveMag = direction.magnitude;
+        if (moveMag > 0.1f)
+        {
+            _walking = true;
+        }
+        else
+        {
+            _walking = false;
+        }
+
         if (Input.GetButton("Run"))
         {
             _running = true;
@@ -162,6 +173,7 @@ public class OverWorldPC : MonoBehaviour
         }
         else
         {
+            _running = false;
             speed = _walkSpeed;
         }
 
@@ -174,9 +186,9 @@ public class OverWorldPC : MonoBehaviour
         {
             WalkUpdateThird();
         }
+
     }
-    
-    
+
     private void WalkUpdateFirst()
     {
         //Stores that input in a variable to be used later in function
