@@ -210,7 +210,15 @@ public class OverWorldPC : MonoBehaviour
             cam = _cameraFixed;
         }
 
-        direction = new Vector3(x, 0, z).normalized;
+        if (_running)
+        {
+            direction = new Vector3(0, 0, z).normalized;
+        }
+        else
+        {
+
+            direction = new Vector3(x, 0, z).normalized;
+        }
 
         //Check if input is detected before moving player
         float moveMag = direction.magnitude;
