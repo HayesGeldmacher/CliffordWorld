@@ -61,7 +61,7 @@ public class GameManagerOverWorld : MonoBehaviour
             _camControlFirst.frozen = false;
         }
 
-        _pauseMenu.SetActive(freeze);
+        //_pauseMenu.SetActive(freeze);
 
     }
 

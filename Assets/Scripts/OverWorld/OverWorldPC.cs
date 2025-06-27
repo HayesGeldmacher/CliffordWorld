@@ -160,22 +160,24 @@ public class OverWorldPC : MonoBehaviour
         if (moveMag > 0.1f)
         {
             _walking = true;
+            if (Input.GetButton("Run"))
+            {
+                _running = true;
+                speed = _runSpeed;
+            }
+            else
+            {
+                _running = false;
+                speed = _walkSpeed;
+            }
         }
         else
         {
             _walking = false;
-        }
-
-        if (Input.GetButton("Run"))
-        {
-            _running = true;
-            speed = _runSpeed;
-        }
-        else
-        {
             _running = false;
             speed = _walkSpeed;
         }
+
 
         //Check camera state before we calculate move direction
         if (_camState == CameraState.FIRST)
@@ -212,6 +214,7 @@ public class OverWorldPC : MonoBehaviour
 
         if (_running)
         {
+            z = Mathf.Abs(z);
             direction = new Vector3(0, 0, z).normalized;
         }
         else

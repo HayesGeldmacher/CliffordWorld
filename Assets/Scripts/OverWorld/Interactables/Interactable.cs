@@ -26,6 +26,11 @@ public class Interactable : MonoBehaviour
 
     public virtual void Start()
     {
+        if (_manager == null)
+        {
+            _manager = GameManager.instance.GetComponent<DialogueManager>();
+        }
+
         if (_playSound)
         {
             if(TryGetComponent<AudioSource>(out AudioSource source))
@@ -76,10 +81,7 @@ public class Interactable : MonoBehaviour
             _player = GameObject.Find("Player").transform;
         }
 
-       if(_manager == null)
-        {
-            _manager = GameManager.instance.GetComponent<DialogueManager>();
-        }
+       
 
 
         if (_talk)
@@ -146,7 +148,8 @@ public class Interactable : MonoBehaviour
 [CustomEditor(typeof(Interactable), true)]
 public class Interactable_Editor : Editor
 { 
-    public override void OnInspectorGUI()
+    //public override void OnInspectorGUI()
+    public void DontLoadForNow()
     {
         var script = (Interactable)target;
         script._talk = EditorGUILayout.Toggle("Can Talk", script._talk);
