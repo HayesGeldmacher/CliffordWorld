@@ -194,7 +194,15 @@ public class OverWorldPC : MonoBehaviour
     private void WalkUpdateFirst()
     {
         //Stores that input in a variable to be used later in function
-        direction = (transform.right * x + transform.forward * z);
+        if (_running)
+        {
+            z = Mathf.Abs(z);
+            direction = (transform.forward * z);
+        }
+        else
+        {
+            direction = (transform.right * x + transform.forward * z);
+        }
         _controller.Move(direction * speed * Time.deltaTime);
 
     }

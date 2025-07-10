@@ -14,6 +14,7 @@ public class PartyMemberAnim : MonoBehaviour
     [Header("Idle Fields")]
     [SerializeField] private float _idleCoolDown;
     [SerializeField] private float _currentIdleTime;
+    public bool _uniqueIdle = false;
     
     // Start is called before the first frame update
     void Start()
@@ -32,23 +33,27 @@ public class PartyMemberAnim : MonoBehaviour
         _anim.SetBool("running", _running);
 
 
-        if (!_walking)
+        if (_uniqueIdle)
         {
-            _currentIdleTime -= Time.deltaTime;
-            if(_currentIdleTime <= 0)
+            if (!_walking)
             {
-                _anim.SetTrigger("idle");
-                _currentIdleTime = _idleCoolDown;
+                _currentIdleTime -= Time.deltaTime;
+                if(_currentIdleTime <= 0)
+                {
+                    _anim.SetTrigger("idle");
+                    _currentIdleTime = _idleCoolDown;
+                }
             }
-        }
-        else
-        {
-            if (!_walkingLastFrame)
+            else
             {
-                _currentIdleTime = _idleCoolDown;
+                if (!_walkingLastFrame)
+                {
+                    _currentIdleTime = _idleCoolDown;
+                }
             }
-        }
 
-            _walkingLastFrame = _overWorldPC._walking;
+                _walkingLastFrame = _overWorldPC._walking;
+
+        }
     }
 }
