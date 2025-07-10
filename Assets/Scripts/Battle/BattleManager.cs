@@ -22,7 +22,6 @@ public class BattleManager : MonoBehaviour
     public Transform _arenaSpawnPoint;
     private ArenaDataStore _currentArena;
 
-    private BattleUnit _enemyUnit;
 
     public TMP_Text _enemyNameText;
     public TMP_Text _playerNameText;
@@ -36,7 +35,11 @@ public class BattleManager : MonoBehaviour
 
 
     public List<BattleUnit> _partyUnits = new List<BattleUnit>();
+
+    [Header("Enemy Units")]
     public BattleUnit[] _enemyUnits;
+    private BattleUnit _enemyUnit;
+
 
     [Header("PartyTurns")]
     public BattleUnit _currentPartyMember;
@@ -49,6 +52,11 @@ public class BattleManager : MonoBehaviour
     [Header("Timing Fields")]
     public float _maxTurnWait;
     public float _currentWaitTime;
+
+
+    [Header("Admin Fields")]
+    public string _nextScene;
+    [SerializeField] private SceneManagement _sceneManagement;
 
     
     // Start is called before the first frame update
@@ -198,7 +206,7 @@ public class BattleManager : MonoBehaviour
 
         if (_state == BattleState.WON)
         {
-            _dialogueText.text = "Clifford and friends were victorious!";
+            StartCoroutine(BattleVictory());
         }
         else if (_state == BattleState.LOST)
         {
@@ -207,9 +215,13 @@ public class BattleManager : MonoBehaviour
     }
 
    
+    private IEnumerator BattleVictory()
+    {
+        _dialogueText.text = "Clifford and friends were victorious!";
+        yield return new WaitForSeconds(5);
+        _sceneManagement.CallLoadScene(_nextScene);
+    }
 
-
- 
 
     private void RemoveActionsHUD()
     {
@@ -281,7 +293,7 @@ public class BattleManager : MonoBehaviour
 
         //trigger animation and sound here
         BattleUnit target = _partyUnits[Random.Range(0, _partyUnits.Count)];
-        bool hit = _currentPartyMember.AttackSkill(_enemyUnit);
+        bool hit = _enemyUnit.AttackSkill(target);
         if (hit)
         {
             _dialogueText.text = _enemyUnit._unitName + " lashes out at " + target._unitName + " for " + attack._damage + " damage!";
@@ -303,7 +315,7 @@ public class BattleManager : MonoBehaviour
         }
         else
         {
-            _dialogueText.text = _currentPartyMember._unitName + " missed!";
+            _dialogueText.text = _enemyUnit._unitName + " missed!";
             _nextState = BattleState.PLAYERTURN;
             StartCoroutine(EnterState(BattleState.WAIT));
         }

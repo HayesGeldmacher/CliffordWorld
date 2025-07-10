@@ -20,12 +20,30 @@ public class BattleUnit : MonoBehaviour
 
     [Header("Hud")]
     public BattleUnitHUD _hud;
+
+    [Header("Animation")]
+    public Animator _anim;
+    private bool _animates = false;
     
-    // Start is called beforde the first frame update
+    // Start is called before the first frame update
     void Start()
     {
-        
+        CheckForAnimation();
     }
+
+    private void CheckForAnimation()
+    {
+        if (transform.childCount > 0)
+        {
+            Transform child = transform.GetChild(0);
+            if(child.TryGetComponent<Animator>(out Animator animate))
+            {
+                _anim = animate;
+                _animates = true;
+            }
+        }
+    }
+
 
     // Update is called once per frame
     void Update()
@@ -36,12 +54,26 @@ public class BattleUnit : MonoBehaviour
     public void TakeDamage(float damage)
     {
         _currentHP -= _damage;
+        bool isDead = CheckAlive();
+        if (isDead == true)
+        {
+            Die();
+        }
+        else
+        {
+            TakeDamageAnim();
+        }
         
     }
 
     public bool AttackSkill(BattleUnit target)
     {
-       bool hit = _baseAttack.Use(this, target);
+        if (_animates)
+        {
+            _anim.SetTrigger("attack");
+        }
+        
+        bool hit = _baseAttack.Use(this, target);
         return hit;
     }
 
@@ -65,5 +97,17 @@ public class BattleUnit : MonoBehaviour
     public void UpdateEnemyStats()
     {
         _hud.SetEnemyHUD(this);
+    }
+
+    public void Die()
+    {
+        if (!_animates) return;
+        _anim.SetTrigger("Die");
+    }
+    
+    public void TakeDamageAnim()
+    {
+        if (!_animates) return;
+        _anim.SetTrigger("hurt");
     }
 }
