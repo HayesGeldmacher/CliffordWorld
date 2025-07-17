@@ -11,6 +11,21 @@ public class BattleHUD : MonoBehaviour
     [SerializeField] private Animator _actionPointerAnim;
     [SerializeField] private Animator _playerActionButtons;
 
+    [SerializeField] private Animator _blackAnim;
+
+    private void Awake()
+    {
+        StartCoroutine(FadeBlackIntro());
+    }
+
+    private IEnumerator FadeBlackIntro()
+    {
+        _blackAnim.SetTrigger("instantBlack");
+        yield return new WaitForSeconds(0.5f);
+        _blackAnim.SetTrigger("out");
+    }
+
+
     public void SetButtons(BattleUnit unit)
     {
         

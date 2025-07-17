@@ -77,6 +77,7 @@ public class BattleManager : MonoBehaviour
             Enemy enemy = MapStateData.instance._currentEnemy;
             if(enemy != null)
             {
+                _defaultArena.SetActive(false);
                 arena = Instantiate(enemy._arena, _arenaSpawnPoint);
             }
             else

@@ -102,7 +102,7 @@ public class BattleUnit : MonoBehaviour
     public void Die()
     {
         if (!_animates) return;
-        _anim.SetTrigger("Die");
+        _anim.SetTrigger("die");
     }
     
     public void TakeDamageAnim()
