@@ -10,8 +10,6 @@ public class SkillManager : MonoBehaviour
 
     public void SetSkillButtons(BattleUnit unit)
     {
-        Button button = _targetSkillButttons[0];
-
         int skillNum = 0;
         foreach (TargetSkill skill in unit._targetSkills)
         {
@@ -20,6 +18,7 @@ public class SkillManager : MonoBehaviour
 
             Button currentButton = _targetSkillButttons[skillNum];
             ChangeCallback(currentButton, unit._targetSkills[skillNum]);
+            CheckSkillRequirements(skill, unit, currentButton);
         }
 
         skillNum += 1; 
@@ -29,12 +28,43 @@ public class SkillManager : MonoBehaviour
     {
         Debug.Log("Called on " + button.name);
         button.onClick.RemoveAllListeners();
-        //button.onClick.AddListener(_battleManager.OnSkillButton(skill));
         button.onClick.AddListener(() => _battleManager.OnSkillButton(skill));
     }
 
     public void ListenerCalled()
     {
         Debug.Log("Listener was fucking called!");
+    }
+
+    public void CheckSkillRequirements(TargetSkill skill, BattleUnit unit, Button button)
+    {
+        //checking requirements of a skill before it can be cast!
+        bool canCast = true;
+
+        int APCost = skill._APCost;
+        int currentAP = unit._currentAP;
+        if(APCost > 0)
+        {
+            if(APCost > currentAP)
+            {
+                canCast = false;
+            }
+        }
+
+        int HPCost = skill._HPCost;
+        int currentHP = unit._currentHP;
+        if(HPCost > 0)
+        {
+            if(HPCost > currentHP)
+            {
+                canCast = false;
+            }
+        }
+
+        if (!canCast)
+        {
+            button.interactable = false;
+        }
+
     }
 }

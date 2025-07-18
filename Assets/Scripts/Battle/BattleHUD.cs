@@ -68,4 +68,9 @@ public class BattleHUD : MonoBehaviour
 
         skillNum += 1;
     }
+
+    public void SetDialogueBoxSkill()
+    {
+
+    }
 }

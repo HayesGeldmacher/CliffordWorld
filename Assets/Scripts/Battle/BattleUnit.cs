@@ -9,9 +9,11 @@ public class BattleUnit : MonoBehaviour
     public int _unitLevel;
     public int _damage;
     public int _maxHP;
+    public int _maxAP;
+    public int _maxStress;
     public int _currentHP;
     public int _currentAP;
-    public int _maxAP;
+    public int _currentStress;
 
     [Header("Skills")]
     public AttackSkill _baseAttack;
@@ -44,7 +46,6 @@ public class BattleUnit : MonoBehaviour
         }
     }
 
-
     // Update is called once per frame
     void Update()
     {
@@ -62,8 +63,7 @@ public class BattleUnit : MonoBehaviour
         else
         {
             TakeDamageAnim();
-        }
-        
+        } 
     }
 
     public bool AttackSkill(BattleUnit target)

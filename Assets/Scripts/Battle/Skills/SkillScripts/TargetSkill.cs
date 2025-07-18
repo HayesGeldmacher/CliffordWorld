@@ -14,7 +14,8 @@ public class TargetSkill : ScriptableObject
     [Header("Resource Cost")]
     public int _APCost;
     public int _HPCost;
-    
+    public int _stressCost;
+
     public bool _limited = false;
     public int _uses;
     public int _coolDownTurns;

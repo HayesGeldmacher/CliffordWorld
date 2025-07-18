@@ -240,7 +240,7 @@ public class BattleManager : MonoBehaviour
         bool hit = _currentPartyMember.CastTargetSkill(_enemyUnit, skill);
         if (hit)
         {
-         //  _dialogueText.text = _currentPartyMember._unitName + " dreamt " + skill._name + " at " + _enemyUnit " for " + skill._damage + " damage!";
+            _dialogueText.text = _currentPartyMember._unitName + " cast " + skill._name + " at " + _enemyUnit._unitName + " !";
 
             bool isDead = _enemyUnit.CheckAlive();
 
@@ -375,6 +375,13 @@ public class BattleManager : MonoBehaviour
 
         //open up the skills folder!
         Debug.Log("ACTIVATED SKILLS BUTTON WHOOO!!!");
+
+        if (_state != BattleState.PLAYERTURN) return;
+
+
+        StartCoroutine(PlayerTargetSkill(skill));
+        _battleHUD.ActivatePlayerActionButtons(false);
+
     }
 
     private void AssignSkillButtons()
