@@ -15,7 +15,7 @@ public class BattleUnitHUD : MonoBehaviour
         string currentHP = unit._currentHP.ToString();
         string maxHP = unit._maxHP.ToString();
         _currentHPText.text = currentHP + " / " + maxHP;
-       // _currentAPText.text = unit._currentAP + " / " + unit._maxAP;
+       _currentAPText.text = unit._currentAP + " / " + unit._maxAP;
     }
 
     public void SetHP(BattleUnit unit)

@@ -10,15 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f2577520c63d0b14c917fca96373c3f6, type: 3}
-  m_Name: Attack3
+  m_Name: ViciousCut
   m_EditorClassIdentifier: 
-  _name: Attack
-  _description: Attacks the target for base damage.
-  _APCost: 0
+  _name: Vicious Claw
+  _description: Deals heavy damage, but with a high miss rate
+  _APCost: 5
   _HPCost: 0
-  _limited: 0
-  _uses: 0
-  _coolDownTurns: 0
-  _random: 0
-  _successChance: 0
-  _damage: 35
+  _limited: 1
+  _uses: 5
+  _coolDownTurns: 2
+  _random: 1
+  _successChance: 60
+  _damage: 48

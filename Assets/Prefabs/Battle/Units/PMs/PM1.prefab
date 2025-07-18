@@ -160,8 +160,9 @@ MonoBehaviour:
   _maxAP: 0
   _baseAttack: {fileID: 11400000, guid: d929ac3b07933cf4db700370dd31a5b8, type: 2}
   _targetSkills:
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 11400000, guid: 4d329a75332a4d449ae20376551eaf23, type: 2}
+  - {fileID: 11400000, guid: d121dd3b0204744448721529eda2cf13, type: 2}
   _noTargetSkills:
-  - {fileID: 0}
+  - {fileID: 11400000, guid: 686b8faea5c9bfb4082eb8fd7a2f59f6, type: 2}
   _hud: {fileID: 0}
+  _anim: {fileID: 0}

@@ -10,15 +10,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f2577520c63d0b14c917fca96373c3f6, type: 3}
-  m_Name: Attack1 2
+  m_Name: QuickSnap
   m_EditorClassIdentifier: 
-  _name: Attack
-  _description: Attacks the target for base damage.
+  _name: Quick Snap
+  _description: Attacks the target for medium damage with guaranteed hit, but hurts
+    caster.
   _APCost: 0
-  _HPCost: 0
+  _HPCost: 2
   _limited: 0
   _uses: 0
   _coolDownTurns: 0
   _random: 0
-  _successChance: 0
-  _damage: 48
+  _successChance: 100
+  _damage: 20

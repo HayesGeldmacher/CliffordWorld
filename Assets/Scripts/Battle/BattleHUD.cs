@@ -11,7 +11,10 @@ public class BattleHUD : MonoBehaviour
     [SerializeField] private Animator _actionPointerAnim;
     [SerializeField] private Animator _playerActionButtons;
 
+    [SerializeField] private TMP_Text _dialogueText;
+
     [SerializeField] private Animator _blackAnim;
+    public Transform[] _skillButtons;
 
     private void Awake()
     {
@@ -39,5 +42,20 @@ public class BattleHUD : MonoBehaviour
     public void ActivatePlayerActionButtons(bool activate)
     {
         _playerActionButtons.SetBool("appear", activate);
+    }
+
+    public void SetPartyMemberSkills(BattleUnit unit)
+    {
+        int skillNum = 0;
+        foreach (TargetSkill skill in unit._targetSkills)
+        {
+            if (skillNum >= 5) return;
+
+            
+
+            TMP_Text skillName = transform.GetChild(0).GetComponent<TMP_Text>();
+            skillName.text = skill._name;
+
+        }
     }
 }

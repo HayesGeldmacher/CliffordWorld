@@ -77,6 +77,18 @@ public class BattleUnit : MonoBehaviour
         return hit;
     }
 
+    public bool CastTargetSkill(BattleUnit target, TargetSkill skill)
+    {
+        if (_animates)
+        {
+            //change to unique anim at some point for each  skill
+            _anim.SetTrigger("attack");
+        }
+
+        bool hit = skill.Use(this, target);
+        return hit;
+    }
+
     public bool CheckAlive()
     {
         if (_currentHP <= 0)

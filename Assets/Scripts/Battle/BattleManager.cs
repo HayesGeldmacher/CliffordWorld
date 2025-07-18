@@ -32,6 +32,7 @@ public class BattleManager : MonoBehaviour
     public BattleUnitHUD _enemyHUD;
 
     public GameObject _actionSelections;
+    public SkillManager _skillManager;
 
 
     public List<BattleUnit> _partyUnits = new List<BattleUnit>();
@@ -229,7 +230,38 @@ public class BattleManager : MonoBehaviour
         _actionSelections.SetActive(false);
     }
 
+    private IEnumerator PlayerTargetSkill(TargetSkill skill)
+    {
+        yield return new WaitForSeconds(0.25f);
 
+        //trigger animation and sound here
+        bool hit = _currentPartyMember.CastTargetSkill(_enemyUnit, skill);
+        if (hit)
+        {
+         //  _dialogueText.text = _currentPartyMember._unitName + " dreamt " + skill._name + " at " + _enemyUnit " for " + skill._damage + " damage!";
+
+            bool isDead = _enemyUnit.CheckAlive();
+
+            if (isDead)
+            {
+                yield return new WaitForSeconds(1f);
+                _state = BattleState.WON;
+                StartCoroutine(BattleEnd());
+            }
+            else
+            {
+                yield return new WaitForSeconds(0.25f);
+                EndPlayerTurn();
+            }
+        }
+        else
+        {
+            _dialogueText.text = _currentPartyMember._unitName + " missed!";
+            EndPlayerTurn();
+        }
+
+        yield return new WaitForSeconds(0.1f);
+    }
 
     private IEnumerator PlayerAttack()
     {
@@ -327,16 +359,23 @@ public class BattleManager : MonoBehaviour
     public void OnAttackButton()
     {
         if (_state != BattleState.PLAYERTURN) return;
-        _battleHUD.ActivatePlayerActionButtons(false);
         StartCoroutine(PlayerAttack());
+        _battleHUD.ActivatePlayerActionButtons(false);
 
     }
 
-    public void OnSkillBUtton()
+    public void OnSkillButton(TargetSkill skill)
     {
         //check if skill is targeted or non-targeted
 
         //battleunit.nontargetskill(nontargetskill)
         //battleunit.targettskill(targetskill)
+
+        //open up the skills folder!
+    }
+
+    private void AssignSkillButtons()
+    {
+        
     }
 }
