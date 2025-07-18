@@ -41,21 +41,31 @@ public class BattleHUD : MonoBehaviour
     
     public void ActivatePlayerActionButtons(bool activate)
     {
-        _playerActionButtons.SetBool("appear", activate);
+       // _playerActionButtons.SetBool("appear", activate);
     }
 
     public void SetPartyMemberSkills(BattleUnit unit)
     {
+       //clearing each button for a fresh start
+        foreach(Transform button in _skillButtons)
+        {
+            button.gameObject.SetActive(false);
+        }
+        
+
+        //activating and personalizing each button depending on number of unit skills
         int skillNum = 0;
         foreach (TargetSkill skill in unit._targetSkills)
         {
+            //unit can only have 6 skills equipped at a time
             if (skillNum >= 5) return;
 
-            
-
-            TMP_Text skillName = transform.GetChild(0).GetComponent<TMP_Text>();
+            _skillButtons[skillNum].gameObject.SetActive(true);
+            TMP_Text skillName = _skillButtons[skillNum].GetChild(0).GetComponent<TMP_Text>();
             skillName.text = skill._name;
 
         }
+
+        skillNum += 1;
     }
 }

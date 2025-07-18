@@ -206,6 +206,7 @@ GameObject:
   - component: {fileID: 15406141}
   - component: {fileID: 15406140}
   - component: {fileID: 15406142}
+  - component: {fileID: 15406143}
   m_Layer: 0
   m_Name: BattleManager
   m_TagString: Untagged
@@ -247,6 +248,7 @@ MonoBehaviour:
   _playerHUD: {fileID: 0}
   _enemyHUD: {fileID: 758482741}
   _actionSelections: {fileID: 1892105946}
+  _skillManager: {fileID: 15406143}
   _partyUnits: []
   _enemyUnits: []
   _currentPartyMember: {fileID: 0}
@@ -285,6 +287,26 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _blackAnim: {fileID: 1296252638}
+--- !u!114 &15406143
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 15406139}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 80c5329f7b8c42c48b7b78a1fecf968e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _targetSkillButttons:
+  - {fileID: 952530583}
+  - {fileID: 1510801329}
+  - {fileID: 891936873}
+  - {fileID: 1423303196}
+  - {fileID: 930819243}
+  - {fileID: 166514753}
+  _battleManager: {fileID: 15406140}
 --- !u!1 &92932005
 GameObject:
   m_ObjectHideFlags: 0
@@ -614,7 +636,7 @@ GameObject:
   - component: {fileID: 166514754}
   - component: {fileID: 166514753}
   m_Layer: 5
-  m_Name: Skill5
+  m_Name: Skill6
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -687,11 +709,11 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 15406140}
         m_TargetAssemblyTypeName: BattleManager, Assembly-CSharp
-        m_MethodName: OnAttackButton
-        m_Mode: 1
+        m_MethodName: OnSkillBUtton
+        m_Mode: 2
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_ObjectArgumentAssemblyTypeName: TargetSkill, Assembly-CSharp
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -3829,7 +3851,7 @@ GameObject:
   - component: {fileID: 930819244}
   - component: {fileID: 930819243}
   m_Layer: 5
-  m_Name: Skill4
+  m_Name: Skill5
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4109,19 +4131,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 952530584}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 15406140}
-        m_TargetAssemblyTypeName: BattleManager, Assembly-CSharp
-        m_MethodName: OnAttackButton
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!114 &952530584
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6517,7 +6527,15 @@ MonoBehaviour:
   _dialoguePointerAnim: {fileID: 787856151}
   _actionPointerAnim: {fileID: 0}
   _playerActionButtons: {fileID: 0}
+  _dialogueText: {fileID: 0}
   _blackAnim: {fileID: 1296252638}
+  _skillButtons:
+  - {fileID: 952530582}
+  - {fileID: 1510801328}
+  - {fileID: 891936872}
+  - {fileID: 1423303195}
+  - {fileID: 930819242}
+  - {fileID: 166514752}
 --- !u!1 &1773703047
 GameObject:
   m_ObjectHideFlags: 0

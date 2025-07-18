@@ -198,6 +198,8 @@ public class BattleManager : MonoBehaviour
         _currentPartyMember = _partyUnits[_partyTracker];
         _playerNameText.text = _currentPartyMember._unitName;
         //this is where we determine who is currently active!
+        _skillManager.SetSkillButtons(_currentPartyMember);
+        _battleHUD.SetPartyMemberSkills(_currentPartyMember);
         _dialogueText.text = _currentPartyMember._unitName + " is ready to act...";
         yield return new WaitForSeconds(0.1f);
     }
@@ -372,6 +374,7 @@ public class BattleManager : MonoBehaviour
         //battleunit.targettskill(targetskill)
 
         //open up the skills folder!
+        Debug.Log("ACTIVATED SKILLS BUTTON WHOOO!!!");
     }
 
     private void AssignSkillButtons()
