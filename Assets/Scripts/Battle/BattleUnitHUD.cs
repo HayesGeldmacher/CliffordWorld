@@ -25,6 +25,11 @@ public class BattleUnitHUD : MonoBehaviour
         _currentHPText.text = currentHP + " / " + maxHP;
     }
 
+    public void SetAP(BattleUnit unit)
+    {
+        _currentAPText.text = unit._currentAP + " / " + unit._maxAP;
+    }
+
     public void SetEnemyHUD(BattleUnit unit)
     {
         _enemyNameText.text = unit._unitName;

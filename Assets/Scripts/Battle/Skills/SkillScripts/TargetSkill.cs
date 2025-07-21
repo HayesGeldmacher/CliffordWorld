@@ -26,6 +26,9 @@ public class TargetSkill : ScriptableObject
 
    public virtual bool Use(BattleUnit caster, BattleUnit target)
     {
+
+        SubtractCost(caster);
+        
         if (_random)
         {
             int randomInt = Random.Range(0, 100);
@@ -46,6 +49,25 @@ public class TargetSkill : ScriptableObject
             return true;
         }   
     } 
+
+    public virtual void SubtractCost(BattleUnit caster)
+    {
+        if(_APCost > 0)
+        {
+            caster.SubtractAP(_APCost);
+        }
+
+        if(_HPCost > 0)
+        {
+            caster.TakeDamage(_APCost);
+        }
+
+        if(_stressCost > 0)
+        {
+            caster.AddStress(_stressCost);
+        }
+    }
+
 
     public virtual void Hit(BattleUnit caster, BattleUnit target)
     {

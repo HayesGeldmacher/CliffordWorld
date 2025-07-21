@@ -122,4 +122,20 @@ public class BattleUnit : MonoBehaviour
         if (!_animates) return;
         _anim.SetTrigger("hurt");
     }
+
+    public void SubtractAP(int cost)
+    {
+        _currentAP -= cost;
+        if(_currentAP < 0)
+        {
+            _currentAP = 0;
+        }
+
+        _hud.SetAP(this);
+    }
+
+    public void AddStress(int stress)
+    {
+        _currentStress += stress;
+    }
 }

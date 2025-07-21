@@ -119,6 +119,9 @@ public class BattleManager : MonoBehaviour
 
         _dialogueText.text = "A terrible presence emerges from the fog...";
 
+        //Setting up HUD
+        _battleHUD.SetPartyStatus(_partyUnits);
+
         //Setting up battle states
         _nextState = BattleState.PLAYERTURN;
         StartCoroutine(EnterState(BattleState.WAIT));

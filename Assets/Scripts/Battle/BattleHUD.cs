@@ -14,7 +14,12 @@ public class BattleHUD : MonoBehaviour
     [SerializeField] private TMP_Text _dialogueText;
 
     [SerializeField] private Animator _blackAnim;
+
+    [SerializeField] private Transform _PMStatusParent;
+
     public Transform[] _skillButtons;
+
+    [SerializeField] private Transform[] _partyStatusFields;
 
     private void Awake()
     {
@@ -63,14 +68,20 @@ public class BattleHUD : MonoBehaviour
             _skillButtons[skillNum].gameObject.SetActive(true);
             TMP_Text skillName = _skillButtons[skillNum].GetChild(0).GetComponent<TMP_Text>();
             skillName.text = skill._name;
+            skillNum += 1;
 
         }
 
-        skillNum += 1;
     }
-
-    public void SetDialogueBoxSkill()
+    
+    public void SetPartyStatus(List<BattleUnit> units)
     {
-
+        int currentUnit = 0;
+        foreach (Transform child in _PMStatusParent)
+        {
+            BattleUnitHUD hud = child.GetComponent<BattleUnitHUD>();
+            hud.SetHUD(units[currentUnit]);
+           
+        }
     }
 }
