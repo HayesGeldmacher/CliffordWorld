@@ -20,7 +20,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: ShaderTestMat
+  m_Name: RenderTextureShaderTestMat
   m_Shader: {fileID: -6465566751694194690, guid: bce9d00a76eee664ab4b329794b818c8,
     type: 3}
   m_Parent: {fileID: 0}
