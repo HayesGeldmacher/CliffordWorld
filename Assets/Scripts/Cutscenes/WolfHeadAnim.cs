@@ -12,6 +12,7 @@ public class WolfHeadAnim : MonoBehaviour
     void Start()
     {
         _anim = transform.GetComponent<Animator>();
+        StartCoroutine(BeginScene());
     }
 
     private IEnumerator BeginScene()
